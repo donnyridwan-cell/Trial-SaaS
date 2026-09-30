@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Brownies Farm — Overview</title>
+  <title>Brownies Farm — Reports</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet" />
@@ -11,11 +11,8 @@
   <style>
     html, body { margin: 0; padding: 0; background: #f4f4f6; }
     * { font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; box-sizing: border-box; }
-    /* Full-screen frame: fills the whole viewport, no left/right gaps */
     .frame { width: 100vw; height: 100vh; overflow: hidden; }
 
-    /* ---------- Micro-interactions ---------- */
-    /* Sidebar nav / section links (only leaf rows that contain a direct label) */
     [data-name="Navigation Link Container"]:has(> p),
     [data-name="Section Link Container"]:has(> p) {
       cursor: pointer; border-radius: 8px;
@@ -26,31 +23,14 @@
     [data-name="Navigation Link Container"]:has(> p):active,
     [data-name="Section Link Container"]:has(> p):active { transform: scale(.98); }
 
-    /* Buttons: Run audit, Edit, Remove */
-    .btn { cursor: pointer; transition: filter .18s ease, transform .08s ease, background-color .18s ease, box-shadow .18s ease; }
-    .btn:hover { filter: brightness(.97); }
+    .btn { cursor: pointer; transition: filter .18s ease, transform .08s ease, box-shadow .18s ease; }
+    .btn:hover { filter: brightness(.96); box-shadow: 0 4px 12px rgba(51,102,204,.25); }
     .btn:active { transform: scale(.96); }
 
-    /* Segmented AI-model control */
-    .seg { cursor: pointer; transition: background-color .18s ease, color .18s ease; }
-    .seg:hover { background-color: #eef1f6; }
-
-    /* Stat widget cards lift on hover */
-    [data-name="Widget Content"] { transition: transform .18s ease, box-shadow .18s ease; }
-    [data-name="Widget"]:hover [data-name="Widget Content"] {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 18px rgba(0,0,0,.10) !important;
-    }
-
-    /* Search input */
     .search-input { outline: none; border: none; background: transparent; padding: 0; width: 100%; }
     [data-name="Search Bar Group"] { transition: border-color .18s ease, box-shadow .18s ease; }
-    [data-name="Search Bar Group"]:focus-within {
-      border-color: #36c !important;
-      box-shadow: 0 0 0 3px rgba(51,102,204,.14);
-    }
+    [data-name="Search Bar Group"]:focus-within { border-color: #36c !important; box-shadow: 0 0 0 3px rgba(51,102,204,.14); }
 
-    /* Notification + user menu */
     [data-name="Notification Container"] { cursor: pointer; transition: background-color .18s ease, transform .08s ease; }
     [data-name="Notification Container"]:hover { background-color: #f1f2f5; }
     [data-name="Notification Container"]:active { transform: scale(.94); }
@@ -58,24 +38,18 @@
     [data-name="User Menu"]:hover { filter: brightness(.95); }
     [data-name="User Menu"]:active { transform: scale(.94); }
 
-    /* Sidebar collapse toggle in header */
     [data-name="Header"] [data-name="Frame"] { cursor: pointer; transition: opacity .18s ease; }
     [data-name="Header"] [data-name="Frame"]:hover { opacity: .6; }
 
-    /* Sidebar scrolls independently on short screens; main content scrolls too */
     .sidebar-scroll { overflow-y: auto; overflow-x: hidden; }
     .sidebar-scroll::-webkit-scrollbar { width: 6px; }
     .sidebar-scroll::-webkit-scrollbar-thumb { background: #dddfe4; border-radius: 3px; }
     .content-scroll { overflow-y: auto; }
-
-    /* Sparkline gentle draw-in on load */
-    @keyframes sparkFade { from { opacity: 0; transform: translateY(2px); } to { opacity: 1; transform: none; } }
-    [data-name="Sparkline Container"] { animation: sparkFade .5s ease both; }
   </style>
 </head>
 <body>
   <div class="frame">
-    <div class="bg-[#f4f4f6] content-stretch flex items-start relative size-full" data-name="Overview">
+    <div class="bg-[#f4f4f6] content-stretch flex items-start relative size-full" data-name="Reports">
       <div class="sidebar-scroll border-[#dddfe4] border-r border-solid content-stretch flex flex-col h-full items-start relative shrink-0 w-[280px]" data-name="Logo">
         <div class="bg-white border-[#dddfe4] border-b border-solid content-stretch flex gap-[12px] items-center px-[16px] py-[12px] relative shrink-0 w-full" data-name="Header">
           <div class="bg-[#36c] content-stretch flex items-center justify-center p-[10px] relative rounded-[12px] shrink-0 size-[44px]" data-name="Logo Container">
@@ -99,15 +73,15 @@
             <p class="[word-break:break-word] font-['Geist'] font-semibold leading-[1.2] relative shrink-0 text-[#707a8f] text-[12px] uppercase w-full">
               Main
             </p>
-            <div data-nav="index.html" class="bg-[#eeeff2] content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative rounded-[8px] shrink-0 w-full" data-name="Navigation Link Container">
+            <div data-nav="index.html" class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative shrink-0 w-full" data-name="Navigation Link Container">
               <div class="overflow-clip relative shrink-0 size-[20px]" data-name="iconsax-grids">
                 <div class="absolute contents inset-0" data-name="Clip path group">
                   <div class="absolute inset-[5.21%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.042px_-1.042px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
-                    <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/f3413.svg" />
+                    <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/7cbb1.svg" />
                   </div>
                 </div>
               </div>
-              <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#36c] text-[14px]">
+              <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#2d3139] text-[14px]">
                 Overview
               </p>
             </div>
@@ -249,15 +223,15 @@
                   Strategies
                 </p>
               </div>
-              <div data-nav="reports.html" class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative shrink-0 w-full" data-name="Section Link Container">
+              <div data-nav="reports.html" class="bg-[#eeeff2] content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative rounded-[8px] shrink-0 w-full" data-name="Section Link Container">
                 <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
                   <div class="absolute contents inset-0" data-name="Clip path group">
                     <div class="absolute inset-[5.21%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.042px_-1.042px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
-                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/d5f92.svg" />
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/b9cb8.svg" />
                     </div>
                   </div>
                 </div>
-                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#2d3139] text-[14px]">
+                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#36c] text-[14px]">
                   Reports
                 </p>
               </div>
@@ -268,15 +242,15 @@
               Settings
             </p>
             <div class="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Section Links">
-              <div data-nav="connection.html" class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative shrink-0 w-full" data-name="Section Link Container">
+              <div data-nav="connection.html" class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative rounded-[8px] shrink-0 w-full" data-name="Section Link Container">
                 <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
                   <div class="absolute contents inset-0" data-name="Clip path group">
                     <div class="absolute inset-[5.21%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.042px_-1.042px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
-                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/5b430.svg" />
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/9cd63.svg" />
                     </div>
                   </div>
                 </div>
-                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#2d3139] text-[14px]">
+                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#1b1d22] text-[14px]">
                   Connection
                 </p>
               </div>
@@ -371,13 +345,13 @@
               </div>
             </div>
             <p class="[word-break:break-word] font-['Geist'] font-medium leading-[0.9] relative shrink-0 text-[#8d95a5] text-[14px] whitespace-nowrap">
-              Main
+              Settings
             </p>
             <div class="relative shrink-0 size-[12px]" data-name="Frame">
               <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/c9c7a.svg" />
             </div>
             <p class="[word-break:break-word] font-['Geist'] font-medium leading-[0.9] relative shrink-0 text-[#2d3139] text-[14px] whitespace-nowrap">
-              Overview
+              Connection
             </p>
           </div>
           <div class="content-stretch flex gap-[12px] items-center relative shrink-0 w-[481px]" data-name="Search Bar Container">
@@ -411,166 +385,61 @@
           </div>
         </div>
         <div class="content-scroll bg-[#f4f4f6] content-stretch flex flex-[1_0_0] flex-col gap-[20px] items-start min-h-px p-[20px] relative w-full" data-name="Dashboard Content">
-          <div class="[word-break:break-word] content-stretch flex flex-col gap-[12px] items-start leading-[0.9] relative rounded-[10px] shrink-0 w-full" data-name="Dashboard Header">
+          <div class="[word-break:break-word] content-stretch flex flex-col gap-[12px] items-start leading-[0.9] relative shrink-0 w-full">
             <p class="font-['Geist'] font-semibold relative shrink-0 text-[#1b1d22] text-[24px] tracking-[-0.96px] w-full">
-              Overview
+              Reports
             </p>
             <p class="font-['Geist'] font-normal relative shrink-0 text-[#707a8f] text-[14px] w-full">
-              Last AI site audit ran on 25 Sep 2026 · 19 findings · data from crawl, GA4, Search Console, PageSpeed, and Clarity combined.
+              Data sources reading aizonemarketing.io. No need to change — just moved to its own page.
             </p>
           </div>
-          <div class="bg-white border border-[#e2e4e9] border-solid content-stretch flex flex-col gap-[24px] items-start p-[20px] relative rounded-[12px] shrink-0 w-full" data-name="Widget Container">
-            <div class="content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-full">
-              <div class="content-stretch flex gap-[20px] items-center justify-end relative shrink-0 w-full">
-                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#636c7e] text-[16px]">
-                  Main
-                </p>
-                <div class="content-stretch flex gap-[10px] items-center relative shrink-0">
-                  <div class="relative shrink-0 size-[20px]" data-name="Frame">
-                    <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/a9b52.svg" />
-                  </div>
-                  <p class="[word-break:break-word] font-['Geist'] font-normal leading-[1.5] relative shrink-0 text-[#707a8f] text-[14px] text-center whitespace-nowrap">
-                    AI Model
-                  </p>
+          <div class="bg-white content-stretch flex flex-[1_0_0] flex-col gap-[12px] items-center justify-center min-h-px p-[20px] relative rounded-[12px] w-full">
+            <div class="h-[189px] relative shrink-0 w-[224px]">
+              <div class="absolute h-[261px] left-[-111px] top-[-17px] w-[446px]" data-name="Vector">
+                <div class="absolute inset-[-0.19%_0_0_0]">
+                  <img alt="" class="block max-w-none size-full" src="./assets/195dc.svg" />
                 </div>
-                <div class="content-stretch flex gap-[12px] items-center relative shrink-0">
-                  <div class="bg-white border border-[#e2e4e9] border-solid content-stretch flex items-center p-[2px] relative rounded-[6px] shrink-0">
-                    <div class="seg bg-white content-stretch flex items-center px-[6px] py-[2px] relative rounded-[6px] shrink-0">
-                      <p class="[word-break:break-word] font-['Geist'] font-normal leading-[1.5] relative shrink-0 text-[#707a8f] text-[14px] text-center whitespace-nowrap">
-                        Flash
-                      </p>
-                    </div>
-                    <div class="seg bg-[#eff3fb] content-stretch flex items-center px-[6px] py-[2px] relative rounded-[6px] shrink-0">
-                      <p class="[word-break:break-word] font-['Geist'] font-medium leading-[1.5] relative shrink-0 text-[#1b1d22] text-[14px] text-center whitespace-nowrap">
-                        Pro
-                      </p>
-                    </div>
-                    <div class="seg bg-white content-stretch flex items-center px-[6px] py-[2px] relative rounded-[6px] shrink-0">
-                      <p class="[word-break:break-word] font-['Geist'] font-normal leading-[1.5] relative shrink-0 text-[#707a8f] text-[14px] text-center whitespace-nowrap">
-                        3.5 Flash
-                      </p>
-                    </div>
-                  </div>
-                  <div class="flex flex-row items-center self-stretch">
-                    <div class="btn bg-white border border-[#e2e4e9] border-solid content-stretch flex h-full items-center px-[14px] py-[2px] relative rounded-[6px] shrink-0">
-                      <p class="[word-break:break-word] font-['Geist'] font-normal leading-[1.5] relative shrink-0 text-[#707a8f] text-[14px] text-center whitespace-nowrap">
-                        Edit
-                      </p>
-                    </div>
-                  </div>
-                  <div class="flex flex-row items-center self-stretch">
-                    <div class="btn bg-[#fef1f9] content-stretch flex gap-[10px] h-full items-center px-[12px] py-[2px] relative rounded-[6px] shrink-0">
-                      <p class="[word-break:break-word] font-['Geist'] font-normal leading-[1.5] relative shrink-0 text-[#ec1399] text-[14px] text-center whitespace-nowrap">
-                        Remove
-                      </p>
-                      <div class="overflow-clip relative shrink-0 size-[18px]" data-name="Frame">
-                        <div class="absolute contents inset-0" data-name="Clip path group">
-                          <div class="absolute inset-[5.21%_9.4%_5.21%_9.36%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.685px_-0.938px] mask-size-[18px_18px]" style="mask-image:url('./assets/c0e22.svg');-webkit-mask-image:url('./assets/c0e22.svg')" data-name="Group">
-                            <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/0942c.svg" />
-                          </div>
+              </div>
+              <div class="absolute bg-[#f7f7f8] content-stretch flex items-center left-[76px] p-[6px] rounded-[14px] top-[58.38px]">
+                <div class="bg-white content-stretch flex items-center justify-center p-px relative rounded-[12px] shrink-0">
+                  <div class="content-stretch flex items-center justify-center p-[9.153px] relative rounded-[12px] shrink-0">
+                    <div aria-hidden="true" class="absolute bg-[#f7f7f8] inset-0 pointer-events-none rounded-[12px]"></div>
+                    <div class="overflow-clip relative shrink-0 size-[38px]" data-name="Frame">
+                      <div class="absolute contents inset-0" data-name="Clip path group">
+                        <div class="absolute inset-[5.21%_9.38%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-3.563px_-1.979px] mask-size-[38px_38px]" style="mask-image:url('./assets/215d1.svg');-webkit-mask-image:url('./assets/215d1.svg')" data-name="Group">
+                          <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/ffbb0.svg" />
                         </div>
                       </div>
                     </div>
+                    <div class="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_4.577px_0px_16.018px_0px_rgba(0,0,0,0.04),inset_0px_4.577px_16.018px_0px_rgba(0,0,0,0.04)]"></div>
                   </div>
-                </div>
-              </div>
-              <div class="bg-[#f6f7f8] content-stretch flex flex-col gap-[6px] items-start p-[8px] relative rounded-[12px] shrink-0 w-full" data-name="Summary Container">
-                <div class="content-stretch flex gap-[10px] items-center justify-center pl-[12px] py-[4px] relative shrink-0 w-full" data-name="Summary Header">
-                  <div class="relative shrink-0 size-[20px]" data-name="Frame">
-                    <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/714fd.svg" />
-                  </div>
-                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-semibold leading-none min-w-px relative text-[#363b45] text-[16px] tracking-[-0.32px]">
-                    Audit Summary
-                  </p>
-                  <div class="content-stretch flex gap-[12px] items-center relative rounded-[8px] shrink-0">
-                    <p class="[word-break:break-word] font-['Geist'] font-normal leading-[0.9] relative shrink-0 text-[#707a8f] text-[14px] whitespace-nowrap">
-                      19 findings
-                    </p>
-                    <div class="btn bg-[#36c] content-stretch flex gap-[8px] h-[34px] items-center px-[14px] py-[8px] relative rounded-[8px] shrink-0">
-                      <div class="relative shrink-0 size-[20px]" data-name="Frame">
-                        <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/3031c.svg" />
-                      </div>
-                      <p class="[word-break:break-word] font-['Geist'] font-medium leading-[0.9] relative shrink-0 text-[14px] text-white whitespace-nowrap">
-                        Run audit · Pro
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="[word-break:break-word] bg-white content-stretch drop-shadow-[0px_2px_1px_rgba(0,0,0,0.07)] flex flex-col font-['Geist'] font-medium gap-[8px] items-center px-[12px] py-[20px] relative rounded-[10px] shrink-0 text-[14px] tracking-[-0.42px] w-full" data-name="Summary Content">
-                  <p class="leading-[1.4] relative shrink-0 text-[#9ea5b3] w-full">
-                    Reads the crawl, GA4, Search Console, PageSpeed and Clarity together, scores the site and files what it finds as tasks. Last run 9/25/2026.
-                  </p>
-                  <p class="leading-[1.5] relative shrink-0 text-[#4c5361] w-full">
-                    AIZone Marketing shows positive trends in engagement and visitor sessions; however, significant technical and on-page issues are hindering search performance. Numerous non-indexable pages, redirects, and client-side errors are negatively affecting crawlability and overall site health. Resolving these foundational issues is crucial for boosting visibility and organic traffic. The site also requires attention regarding meta descriptions and heading structures to improve on-page optimisation.
-                  </p>
                 </div>
               </div>
             </div>
-            <div class="content-stretch flex gap-[12px] items-center relative shrink-0 w-full" data-name="Widget Group">
-              <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start min-w-px p-[4px] relative rounded-[8px]" data-name="Widget">
-                <div class="content-stretch flex items-center justify-center px-[12px] py-[4px] relative shrink-0 w-full" data-name="Widget Header">
-                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#636c7e] text-[14px]">
-                    Open Task
+            <div class="content-stretch flex flex-col gap-[34px] items-center relative shrink-0 w-full">
+              <div class="[word-break:break-word] content-stretch flex flex-col gap-[18px] items-center justify-center relative shrink-0 text-center w-full">
+                <p class="font-['Geist'] font-medium leading-[0.9] relative shrink-0 text-[#1b1d22] text-[20px] w-full">
+                  No reports have been produced yet
+                </p>
+                <div class="font-['Geist'] font-normal leading-[0] relative shrink-0 text-[#ababb0] text-[14px] tracking-[-0.14px] w-full">
+                  <p class="leading-[1.5] mb-0 text-[#707a8f]">Creating a report takes a copy of the client's latest audit, their data</p>
+                  <p class="leading-[1.5] mb-0 text-[#707a8f]">dates and the work delivered in the period you choose, and keeps it</p>
+                  <p class="leading-[1.5] mb-0 text-[#707a8f]">exactly as it is today - so what you send this month still reads the</p>
+                  <p class="text-[#707a8f]">
+                    <span class="leading-[1.5]">same in a year. </span>
+                    <span class="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-from-font decoration-solid leading-[1.5] underline">The live preview</span>
+                    <span class="leading-[1.5]"> keeps following the newest audit.</span>
                   </p>
-                </div>
-                <div class="bg-white content-stretch drop-shadow-[0px_2px_1px_rgba(0,0,0,0.07)] flex gap-[10px] items-center justify-center px-[12px] py-[14px] relative rounded-[8px] shrink-0 w-full" data-name="Widget Content">
-                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-bold leading-none min-w-px relative text-[#1b1d22] text-[28px] tracking-[-0.56px]">
-                    12
-                  </p>
-                  <div class="h-[30px] relative shrink-0 w-[55px]" data-name="Sparkline Container">
-                    <div class="absolute inset-[-1.67%_-0.91%_0_-0.91%]">
-                      <img alt="" class="block max-w-none size-full" src="./assets/78045.svg" />
-                    </div>
-                  </div>
                 </div>
               </div>
-              <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start min-w-px p-[4px] relative rounded-[8px]" data-name="Widget">
-                <div class="content-stretch flex items-center justify-center px-[12px] py-[4px] relative shrink-0 w-full" data-name="Widget Header">
-                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#636c7e] text-[14px]">
-                    Confirmed
-                  </p>
-                </div>
-                <div class="bg-white content-stretch drop-shadow-[0px_2px_1px_rgba(0,0,0,0.07)] flex gap-[10px] items-center justify-center px-[12px] py-[14px] relative rounded-[8px] shrink-0 w-full" data-name="Widget Content">
-                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-bold leading-none min-w-px relative text-[#1b1d22] text-[28px] tracking-[-0.56px]">
-                    10
-                  </p>
-                  <div class="h-[30px] relative shrink-0 w-[55px]" data-name="Sparkline Container">
-                    <div class="absolute inset-[-1.67%_-0.91%_0_-0.91%]">
-                      <img alt="" class="block max-w-none size-full" src="./assets/78045.svg" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start min-w-px p-[4px] relative rounded-[8px]" data-name="Widget">
-                <div class="content-stretch flex items-center justify-center px-[12px] py-[4px] relative shrink-0 w-full" data-name="Widget Header">
-                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#636c7e] text-[14px]">
-                    High Priority Open
-                  </p>
-                </div>
-                <div class="bg-white content-stretch drop-shadow-[0px_2px_1px_rgba(0,0,0,0.07)] flex gap-[10px] items-center justify-center px-[12px] py-[14px] relative rounded-[8px] shrink-0 w-full" data-name="Widget Content">
-                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-bold leading-none min-w-px relative text-[#1b1d22] text-[28px] tracking-[-0.56px]">
-                    8
-                  </p>
-                  <div class="h-[30px] relative shrink-0 w-[55px]" data-name="Sparkline Container">
-                    <div class="absolute inset-[-1.67%_-0.91%_0_-0.91%]">
-                      <img alt="" class="block max-w-none size-full" src="./assets/78045.svg" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start min-w-px p-[4px] relative rounded-[8px]" data-name="Widget">
-                <div class="content-stretch flex items-center justify-center px-[12px] py-[4px] relative shrink-0 w-full" data-name="Widget Header">
-                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#636c7e] text-[14px]">
-                    Activity Connection
-                  </p>
-                </div>
-                <div class="bg-white content-stretch flex gap-[10px] items-center justify-center overflow-clip px-[12px] py-[14px] relative rounded-[8px] shadow-[0px_2px_2px_0px_rgba(0,0,0,0.07)] shrink-0 w-full" data-name="Widget Content">
-                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-bold leading-none min-w-px relative text-[#1b1d22] text-[28px] tracking-[-0.56px]">
-                    5/5
-                  </p>
-                  <div class="h-[30px] relative shrink-0 w-[55px]" data-name="Sparkline Container">
-                    <div class="absolute inset-[-1.67%_-0.91%_0_-0.91%]">
-                      <img alt="" class="block max-w-none size-full" src="./assets/78045.svg" />
+              <div class="btn bg-[#36c] content-stretch flex gap-[8px] h-[34px] items-center px-[14px] py-[8px] relative rounded-[8px] shrink-0">
+                <p class="[word-break:break-word] font-['Geist'] font-medium leading-[0.9] relative shrink-0 text-[14px] text-white whitespace-nowrap">
+                  Create New Report
+                </p>
+                <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
+                  <div class="absolute contents inset-0" data-name="Clip path group">
+                    <div class="absolute inset-[21.88%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-4.375px_-4.375px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/c3b18.svg" />
                     </div>
                   </div>
                 </div>
@@ -583,7 +452,6 @@
   </div>
 
   <script>
-    // --- Sidebar nav: click to set the active item ---
     const navRows = document.querySelectorAll(
       '[data-name="Navigation Link Container"]:has(> p), [data-name="Section Link Container"]:has(> p)'
     );
@@ -606,33 +474,11 @@
       });
     });
 
-    // --- AI-model segmented control ---
-    const segs = document.querySelectorAll('.seg');
-    segs.forEach((seg) => {
-      seg.addEventListener('click', () => {
-        segs.forEach((s) => {
-          s.style.backgroundColor = '#ffffff';
-          const p = s.querySelector('p');
-          if (p) { p.style.color = '#707a8f'; p.style.fontWeight = '400'; }
-        });
-        seg.style.backgroundColor = '#eff3fb';
-        const p = seg.querySelector('p');
-        if (p) { p.style.color = '#1b1d22'; p.style.fontWeight = '500'; }
-      });
-    });
-
-    // --- Notification badge: clear count on click ---
     const notif = document.querySelector('[data-name="Notification Container"]');
     const badge = document.querySelector('[data-name="Notification Badge Container"]');
     if (notif && badge) {
       notif.addEventListener('click', () => { badge.style.display = 'none'; });
     }
-
-    // --- Buttons: tiny press feedback (ripple-free, transform handled by CSS) ---
-    document.querySelectorAll('.btn').forEach((b) => {
-      b.setAttribute('role', 'button');
-      b.setAttribute('tabindex', '0');
-    });
   </script>
 </body>
 </html>
