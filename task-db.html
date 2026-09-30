@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Brownies Farm — Task DB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    html, body { margin: 0; padding: 0; background: #f4f4f6; }
+    * { font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; box-sizing: border-box; }
+    .frame { width: 100vw; height: 100vh; overflow: hidden; }
+
+    /* ---------- Micro-interactions ---------- */
+    [data-name="Navigation Link Container"]:has(> p),
+    [data-name="Section Link Container"]:has(> p) {
+      cursor: pointer; border-radius: 8px;
+      transition: background-color .18s ease, transform .08s ease;
+    }
+    [data-name="Navigation Link Container"]:has(> p):hover,
+    [data-name="Section Link Container"]:has(> p):hover { background-color: #f1f2f5; }
+    [data-name="Navigation Link Container"]:has(> p):active,
+    [data-name="Section Link Container"]:has(> p):active { transform: scale(.98); }
+
+    .btn { cursor: pointer; transition: filter .18s ease, transform .08s ease, background-color .18s ease, box-shadow .18s ease; }
+    .btn:hover { filter: brightness(.97); background-color: #eceef1; }
+    .btn:active { transform: scale(.96); }
+
+    [data-name="Widget Content"] { transition: transform .18s ease, box-shadow .18s ease; }
+    [data-name="Widget"]:hover [data-name="Widget Content"] {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(0,0,0,.10) !important;
+    }
+
+    .search-input { outline: none; border: none; background: transparent; padding: 0; width: 100%; }
+    [data-name="Search Bar Group"] { transition: border-color .18s ease, box-shadow .18s ease; }
+    [data-name="Search Bar Group"]:focus-within {
+      border-color: #36c !important;
+      box-shadow: 0 0 0 3px rgba(51,102,204,.14);
+    }
+
+    [data-name="Notification Container"] { cursor: pointer; transition: background-color .18s ease, transform .08s ease; }
+    [data-name="Notification Container"]:hover { background-color: #f1f2f5; }
+    [data-name="Notification Container"]:active { transform: scale(.94); }
+    [data-name="User Menu"] { cursor: pointer; transition: filter .18s ease, transform .08s ease; }
+    [data-name="User Menu"]:hover { filter: brightness(.95); }
+    [data-name="User Menu"]:active { transform: scale(.94); }
+
+    [data-name="Header"] [data-name="Frame"] { cursor: pointer; transition: opacity .18s ease; }
+    [data-name="Header"] [data-name="Frame"]:hover { opacity: .6; }
+
+    .sidebar-scroll { overflow-y: auto; overflow-x: hidden; }
+    .sidebar-scroll::-webkit-scrollbar { width: 6px; }
+    .sidebar-scroll::-webkit-scrollbar-thumb { background: #dddfe4; border-radius: 3px; }
+    .content-scroll { overflow-y: auto; }
+
+    /* Table row highlight on hover */
+    .gcell { transition: background-color .15s ease; }
+    .gcell.hl { background-color: #f5f8ff !important; }
+
+    @keyframes sparkFade { from { opacity: 0; transform: translateY(2px); } to { opacity: 1; transform: none; } }
+    .spark { animation: sparkFade .5s ease both; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="bg-[#f4f4f6] content-stretch flex items-start relative size-full" data-name="Task DB">
+      <div class="sidebar-scroll border-[#dddfe4] border-r border-solid content-stretch flex flex-col h-full items-start relative shrink-0 w-[280px]" data-name="Logo">
+        <div class="bg-white border-[#dddfe4] border-b border-solid content-stretch flex gap-[12px] items-center px-[16px] py-[12px] relative shrink-0 w-full" data-name="Header">
+          <div class="bg-[#36c] content-stretch flex items-center justify-center p-[10px] relative rounded-[12px] shrink-0 size-[44px]" data-name="Logo Container">
+            <p class="[word-break:break-word] font-['Geist'] font-bold leading-[1.2] relative shrink-0 text-[#f9fafb] text-[14px] text-center whitespace-nowrap">
+              BF
+            </p>
+          </div>
+          <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-bold leading-none min-w-px relative text-[#2d3139] text-[20px]">
+            Brownies Farm
+          </p>
+          <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
+            <div class="absolute contents inset-0" data-name="Clip path group">
+              <div class="absolute inset-[5.21%_5.33%_5.21%_5.08%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.017px_-1.042px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
+                <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/fe802.svg" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white content-stretch flex flex-[1_0_0] flex-col gap-[20px] items-start min-h-px p-[16px] relative w-full" data-name="Navigation">
+          <div class="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Navigation Item">
+            <p class="[word-break:break-word] font-['Geist'] font-semibold leading-[1.2] relative shrink-0 text-[#707a8f] text-[12px] uppercase w-full">
+              Main
+            </p>
+            <div data-nav="index.html" class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative shrink-0 w-full" data-name="Navigation Link Container">
+              <div class="overflow-clip relative shrink-0 size-[20px]" data-name="iconsax-grids">
+                <div class="absolute contents inset-0" data-name="Clip path group">
+                  <div class="absolute inset-[5.21%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.042px_-1.042px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
+                    <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/7cbb1.svg" />
+                  </div>
+                </div>
+              </div>
+              <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#2d3139] text-[14px]">
+                Overview
+              </p>
+            </div>
+          </div>
+          <div class="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Navigation Item">
+            <p class="[word-break:break-word] font-['Geist'] font-semibold leading-[1.2] relative shrink-0 text-[#707a8f] text-[12px] uppercase w-full">
+              Marketing Channels
+            </p>
+            <div class="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Navigation Link Container">
+              <div class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative shrink-0 w-full" data-name="Navigation Link Container">
+                <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
+                  <div class="absolute contents inset-0" data-name="Clip path group">
+                    <div class="absolute inset-[5.21%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.042px_-1.042px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/b6030.svg" />
+                    </div>
+                  </div>
+                </div>
+                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#2d3139] text-[14px]">
+                  Website
+                </p>
+              </div>
+              <div data-nav="search-mgkt.html" class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative shrink-0 w-full" data-name="Navigation Link Container">
+                <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
+                  <div class="absolute contents inset-0" data-name="Clip path group">
+                    <div class="absolute inset-[5.29%_5.07%_5.25%_5.08%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.017px_-1.058px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/460ba.svg" />
+                    </div>
+                  </div>
+                </div>
+                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#2d3139] text-[14px]">
+                  Search MGKT
+                </p>
+              </div>
+              <div class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative shrink-0 w-full" data-name="Navigation Link Container">
+                <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
+                  <div class="absolute contents inset-0" data-name="Clip path group">
+                    <div class="absolute inset-[5.21%_5.24%_7.87%_7.89%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.577px_-1.041px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/2e45f.svg" />
+                    </div>
+                  </div>
+                </div>
+                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#2d3139] text-[14px]">
+                  Paid Media
+                </p>
+              </div>
+              <div class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative shrink-0 w-full" data-name="Navigation Link Container">
+                <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
+                  <div class="absolute contents inset-0" data-name="Clip path group">
+                    <div class="absolute inset-[5.75%_5.42%_5.79%_5.42%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.083px_-1.151px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/1b979.svg" />
+                    </div>
+                  </div>
+                </div>
+                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#2d3139] text-[14px]">
+                  Social Media
+                </p>
+              </div>
+              <div class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative shrink-0 w-full" data-name="Navigation Link Container">
+                <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
+                  <div class="absolute contents inset-0" data-name="Clip path group">
+                    <div class="absolute inset-[5.21%_5.21%_5.21%_5.17%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.033px_-1.042px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/1b005.svg" />
+                    </div>
+                  </div>
+                </div>
+                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#2d3139] text-[14px]">
+                  Email MGKT
+                </p>
+              </div>
+              <div class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative shrink-0 w-full" data-name="Navigation Link Container">
+                <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
+                  <div class="absolute contents inset-0" data-name="Clip path group">
+                    <div class="absolute inset-[5.21%_5.21%_5.13%_5.21%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.042px_-1.042px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/3e8b7.svg" />
+                    </div>
+                  </div>
+                </div>
+                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#2d3139] text-[14px]">
+                  CRO
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Section">
+            <p class="[word-break:break-word] font-['Geist'] font-semibold leading-[1.2] relative shrink-0 text-[#707a8f] text-[12px] uppercase w-full">Strategy &amp; Report</p>
+            <div class="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Section Links">
+              <div class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative shrink-0 w-full" data-name="Section Link Container">
+                <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
+                  <div class="absolute contents inset-0" data-name="Clip path group">
+                    <div class="absolute inset-[5.21%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.042px_-1.042px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/693ea.svg" />
+                    </div>
+                  </div>
+                </div>
+                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#2d3139] text-[14px]">
+                  Brand Brief
+                </p>
+              </div>
+              <div class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative shrink-0 w-full" data-name="Section Link Container">
+                <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
+                  <div class="absolute contents inset-0" data-name="Clip path group">
+                    <div class="absolute inset-[11.47%_9.37%_11.46%_9.39%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.877px_-2.293px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/106ed.svg" />
+                    </div>
+                  </div>
+                </div>
+                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#2d3139] text-[14px]">
+                  Actionable Item
+                </p>
+              </div>
+              <div data-nav="task-db.html" class="bg-[#eeeff2] content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative rounded-[8px] shrink-0 w-full" data-name="Section Link Container">
+                <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
+                  <div class="absolute contents inset-0" data-name="Clip path group">
+                    <div class="absolute inset-[5.21%_9.38%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.875px_-1.042px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/3984a.svg" />
+                    </div>
+                  </div>
+                </div>
+                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#36c] text-[14px]">
+                  Task DB
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Section">
+            <p class="[word-break:break-word] font-['Geist'] font-semibold leading-[1.2] relative shrink-0 text-[#707a8f] text-[12px] uppercase w-full">
+              Management
+            </p>
+            <div class="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Section Links">
+              <div class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative shrink-0 w-full" data-name="Section Link Container">
+                <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
+                  <div class="absolute contents inset-0" data-name="Clip path group">
+                    <div class="absolute inset-[5.21%_9.38%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.875px_-1.042px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/086b6.svg" />
+                    </div>
+                  </div>
+                </div>
+                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#2d3139] text-[14px]">
+                  Strategies
+                </p>
+              </div>
+              <div class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative shrink-0 w-full" data-name="Section Link Container">
+                <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
+                  <div class="absolute contents inset-0" data-name="Clip path group">
+                    <div class="absolute inset-[5.21%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.042px_-1.042px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/d5f92.svg" />
+                    </div>
+                  </div>
+                </div>
+                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#2d3139] text-[14px]">
+                  Reports
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Section">
+            <p class="[word-break:break-word] font-['Geist'] font-semibold leading-[1.2] relative shrink-0 text-[#707a8f] text-[12px] uppercase w-full">
+              Settings
+            </p>
+            <div class="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Section Links">
+              <div class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative shrink-0 w-full" data-name="Section Link Container">
+                <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
+                  <div class="absolute contents inset-0" data-name="Clip path group">
+                    <div class="absolute inset-[5.21%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.042px_-1.042px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/5b430.svg" />
+                    </div>
+                  </div>
+                </div>
+                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#2d3139] text-[14px]">
+                  Connection
+                </p>
+              </div>
+              <div class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative shrink-0 w-full" data-name="Section Link Container">
+                <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
+                  <div class="absolute contents inset-0" data-name="Clip path group">
+                    <div class="absolute inset-[5.17%_9.77%_4.58%_9.8%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.959px_-1.033px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/fb2d3.svg" />
+                    </div>
+                  </div>
+                </div>
+                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#2d3139] text-[14px]">
+                  Notifications
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Section">
+            <p class="[word-break:break-word] font-['Geist'] font-semibold leading-[1.2] relative shrink-0 text-[#707a8f] text-[12px] uppercase w-full">
+              Assets
+            </p>
+            <div class="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Section Links">
+              <div class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative shrink-0 w-full" data-name="Section Link Container">
+                <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
+                  <div class="absolute contents inset-0" data-name="Clip path group">
+                    <div class="absolute inset-[5.21%_5.17%_5.21%_5.21%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.042px_-1.042px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/0f9e4.svg" />
+                    </div>
+                  </div>
+                </div>
+                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#2d3139] text-[14px]">
+                  Image / Graphics
+                </p>
+              </div>
+              <div class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative shrink-0 w-full" data-name="Section Link Container">
+                <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
+                  <div class="absolute contents inset-0" data-name="Clip path group">
+                    <div class="absolute inset-[5.21%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.042px_-1.042px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/f5520.svg" />
+                    </div>
+                  </div>
+                </div>
+                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#2d3139] text-[14px]">
+                  Videos
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-name="Section">
+            <p class="[word-break:break-word] font-['Geist'] font-semibold leading-[1.2] relative shrink-0 text-[#707a8f] text-[12px] uppercase w-full">
+              Others
+            </p>
+            <div class="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Section Links">
+              <div class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative shrink-0 w-full" data-name="Section Link Container">
+                <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
+                  <div class="absolute contents inset-0" data-name="Clip path group">
+                    <div class="absolute inset-[5.21%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.042px_-1.042px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/7477e.svg" />
+                    </div>
+                  </div>
+                </div>
+                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#2d3139] text-[14px]">
+                  Access
+                </p>
+              </div>
+              <div class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative shrink-0 w-full" data-name="Section Link Container">
+                <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
+                  <div class="absolute contents inset-0" data-name="Clip path group">
+                    <div class="absolute inset-[5.23%_5.21%_5.21%_5.21%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.042px_-1.046px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/667ac.svg" />
+                    </div>
+                  </div>
+                </div>
+                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#2d3139] text-[14px]">
+                  Billing
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content-stretch flex flex-col h-full items-start relative shrink-0 flex-[1_0_0] min-w-px" data-name="Main Content">
+        <div class="bg-white border-[#dddfe4] border-b border-solid content-stretch flex h-[68px] items-center justify-between px-[20px] py-[12px] relative shrink-0 w-full" data-name="Top Bar">
+          <div class="content-stretch flex gap-[6px] items-center relative shrink-0" data-name="Breadcrumbs">
+            <div class="overflow-clip relative shrink-0 size-[14px]" data-name="Frame">
+              <div class="absolute contents inset-0" data-name="Clip path group">
+                <div class="absolute inset-[8.41%_8.33%_8.37%_8.33%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.167px_-1.177px] mask-size-[14px_14px]" style="mask-image:url('./assets/cf65a.svg');-webkit-mask-image:url('./assets/cf65a.svg')" data-name="Group">
+                  <div class="absolute inset-[-4.29%]">
+                    <img alt="" class="block max-w-none size-full" src="./assets/c370b.svg" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="[word-break:break-word] font-['Geist'] font-medium leading-[0.9] relative shrink-0 text-[#8d95a5] text-[14px] whitespace-nowrap">Strategy &amp; Report</p>
+            <div class="relative shrink-0 size-[12px]" data-name="Frame">
+              <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/c9c7a.svg" />
+            </div>
+            <p class="[word-break:break-word] font-['Geist'] font-medium leading-[0.9] relative shrink-0 text-[#2d3139] text-[14px] whitespace-nowrap">
+              Task DB
+            </p>
+          </div>
+          <div class="content-stretch flex gap-[12px] items-center relative shrink-0 w-[481px]" data-name="Search Bar Container">
+            <div class="bg-white border border-[#dddfe4] border-solid content-stretch flex flex-[1_0_0] gap-[10px] items-center min-w-px px-[12px] py-[10px] relative rounded-[8px]" data-name="Search Bar Group">
+              <input type="text" placeholder="Search..." class="search-input [word-break:break-word] flex-[1_0_0] font-['Geist'] font-normal leading-[0.9] min-w-px relative text-[#2d3139] placeholder:text-[#a9afbc] text-[14px]" />
+              <div class="relative shrink-0 size-[20px]" data-name="Frame">
+                <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/95326.svg" />
+              </div>
+            </div>
+            <div class="border border-[#dddfe4] border-solid content-stretch flex gap-[10px] items-center justify-center p-[10px] relative rounded-[90px] shrink-0 size-[40px]" data-name="Notification Container">
+              <div class="overflow-clip relative shrink-0 size-[18px]" data-name="Frame">
+                <div class="absolute contents inset-0" data-name="Clip path group">
+                  <div class="absolute inset-[8.08%_16.6%_8.08%_16.56%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-2.98px_-1.455px] mask-size-[18px_18px]" style="mask-image:url('./assets/c0e22.svg');-webkit-mask-image:url('./assets/c0e22.svg')" data-name="Group">
+                    <div class="absolute inset-[-4.97%_-6.24%_-4.97%_-6.23%]">
+                      <img alt="" class="block max-w-none size-full" src="./assets/2878f.svg" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="absolute bg-[#c3107f] content-stretch flex items-center justify-center left-[16px] px-[4px] py-[2px] rounded-[12px] top-[6px]" data-name="Notification Badge Container">
+                <p class="[word-break:break-word] font-['Geist'] font-medium leading-[0.9] relative shrink-0 text-[12px] text-center text-white tracking-[-0.24px] whitespace-nowrap">
+                  12
+                </p>
+              </div>
+            </div>
+            <div class="bg-[#e2e4e9] content-stretch flex items-center justify-center p-[10px] relative rounded-[90px] shrink-0 size-[40px]" data-name="User Menu">
+              <p class="[word-break:break-word] font-['Geist'] font-semibold leading-[1.2] relative shrink-0 text-[#2d3139] text-[14px] text-center whitespace-nowrap">
+                BF
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="content-scroll bg-[#f4f4f6] content-stretch flex flex-[1_0_0] flex-col gap-[20px] items-start min-h-px p-[20px] relative w-full" data-name="Dashboard Content">
+          <div class="[word-break:break-word] content-stretch flex flex-col gap-[12px] items-start leading-[0.9] relative rounded-[10px] shrink-0 w-full" data-name="Dashboard Header">
+            <p class="font-['Geist'] font-semibold relative shrink-0 text-[#1b1d22] text-[24px] tracking-[-0.96px] w-full">
+              Task DB
+            </p>
+            <p class="font-['Geist'] font-normal relative shrink-0 text-[#707a8f] text-[14px] w-full">
+              All tasks in one table — can be filtered by lane, status, and date range.
+            </p>
+          </div>
+          <div class="bg-white border border-[#e2e4e9] border-solid content-stretch flex flex-col items-start p-[20px] relative rounded-[12px] shrink-0 w-full" data-name="Widget Container">
+            <div class="content-stretch flex gap-[12px] items-center relative shrink-0 w-full" data-name="Widget Group">
+              <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start min-w-px p-[4px] relative rounded-[8px]" data-name="Widget">
+                <div class="content-stretch flex items-center justify-center px-[12px] py-[4px] relative shrink-0 w-full" data-name="Widget Header">
+                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#636c7e] text-[14px]">
+                    Total DItampilkan
+                  </p>
+                </div>
+                <div class="bg-white content-stretch drop-shadow-[0px_2px_1px_rgba(0,0,0,0.07)] flex gap-[10px] items-center justify-center px-[12px] py-[14px] relative rounded-[8px] shrink-0 w-full" data-name="Widget Content">
+                  <div class="[word-break:break-word] content-stretch flex flex-[1_0_0] gap-[8px] items-end leading-none min-w-px relative whitespace-nowrap">
+                    <p class="font-['Geist'] font-bold relative shrink-0 text-[#1b1d22] text-[28px] tracking-[-0.56px]">
+                      12
+                    </p>
+                    <p class="font-['Geist'] font-medium relative shrink-0 text-[#707a8f] text-[16px] tracking-[-0.32px]">
+                      /17
+                    </p>
+                  </div>
+                  <div class="h-[30px] relative shrink-0 w-[55px]" data-name="Sparkline Container">
+                    <div class="spark absolute inset-[-1.67%_-0.91%_0_-0.91%]">
+                      <img alt="" class="block max-w-none size-full" src="./assets/78045.svg" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start min-w-px p-[4px] relative rounded-[8px]" data-name="Widget">
+                <div class="content-stretch flex items-center justify-center px-[12px] py-[4px] relative shrink-0 w-full" data-name="Widget Header">
+                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#636c7e] text-[14px]">
+                    Assigned
+                  </p>
+                </div>
+                <div class="bg-white content-stretch drop-shadow-[0px_2px_1px_rgba(0,0,0,0.07)] flex gap-[10px] items-center justify-center px-[12px] py-[14px] relative rounded-[8px] shrink-0 w-full" data-name="Widget Content">
+                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-bold leading-none min-w-px relative text-[#1b1d22] text-[28px] tracking-[-0.56px]">
+                    2
+                  </p>
+                  <div class="h-[30px] relative shrink-0 w-[55px]" data-name="Sparkline Container">
+                    <div class="spark absolute inset-[-1.67%_-0.91%_0_-0.91%]">
+                      <img alt="" class="block max-w-none size-full" src="./assets/78045.svg" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start min-w-px p-[4px] relative rounded-[8px]" data-name="Widget">
+                <div class="content-stretch flex items-center justify-center px-[12px] py-[4px] relative shrink-0 w-full" data-name="Widget Header">
+                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#636c7e] text-[14px]">
+                    High Priority Open
+                  </p>
+                </div>
+                <div class="bg-white content-stretch drop-shadow-[0px_2px_1px_rgba(0,0,0,0.07)] flex gap-[10px] items-center justify-center px-[12px] py-[14px] relative rounded-[8px] shrink-0 w-full" data-name="Widget Content">
+                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-bold leading-none min-w-px relative text-[#1b1d22] text-[28px] tracking-[-0.56px]">
+                    8
+                  </p>
+                  <div class="h-[30px] relative shrink-0 w-[55px]" data-name="Sparkline Container">
+                    <div class="spark absolute inset-[-1.67%_-0.91%_0_-0.91%]">
+                      <img alt="" class="block max-w-none size-full" src="./assets/78045.svg" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start min-w-px p-[4px] relative rounded-[8px]" data-name="Widget">
+                <div class="content-stretch flex items-center justify-center px-[12px] py-[4px] relative shrink-0 w-full" data-name="Widget Header">
+                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#636c7e] text-[14px]">
+                    Activity Connection
+                  </p>
+                </div>
+                <div class="bg-white content-stretch flex gap-[10px] items-center justify-center overflow-clip px-[12px] py-[14px] relative rounded-[8px] shadow-[0px_2px_2px_0px_rgba(0,0,0,0.07)] shrink-0 w-full" data-name="Widget Content">
+                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-bold leading-none min-w-px relative text-[#1b1d22] text-[28px] tracking-[-0.56px]">
+                    5/5
+                  </p>
+                  <div class="h-[30px] relative shrink-0 w-[55px]" data-name="Sparkline Container">
+                    <div class="spark absolute inset-[-1.67%_-0.91%_0_-0.91%]">
+                      <img alt="" class="block max-w-none size-full" src="./assets/78045.svg" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-[#f4f4f6] border border-[#e2e4e9] border-solid content-stretch flex flex-col gap-[6px] items-start p-[6px] relative rounded-[12px] shrink-0 w-full" data-name="Container">
+            <div class="content-stretch flex items-center justify-between px-[12px] py-[4px] relative shrink-0 w-full" data-name="Header Container">
+              <p class="[word-break:break-word] font-['Geist'] font-semibold leading-[1.2] relative shrink-0 text-[#2d3139] text-[18px] tracking-[-0.54px] whitespace-nowrap">
+                All Tasks
+              </p>
+              <div class="btn bg-[#f4f4f6] border border-[#dddfe4] border-solid content-stretch flex gap-[8px] h-[34px] items-center justify-center px-[14px] py-[8px] relative rounded-[8px] shrink-0">
+                <p class="[word-break:break-word] font-['Geist'] font-normal leading-[0.9] relative shrink-0 text-[#2d3139] text-[14px] whitespace-nowrap">
+                  Export CSV
+                </p>
+                <div class="relative shrink-0 size-[20px]" data-name="Frame">
+                  <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/ba66d.svg" />
+                </div>
+              </div>
+            </div>
+            <div class="bg-white border border-[#e2e4e9] border-solid content-stretch flex flex-col items-start overflow-clip relative rounded-[8px] shrink-0 w-full" data-name="Data Container">
+              <div class="bg-white content-stretch flex items-center relative shrink-0 w-full" data-name="Column Headers Container">
+                <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] h-[34px] items-center min-w-px px-[12px] py-[8px] relative">
+                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-none min-w-px relative text-[#707a8f] text-[14px] tracking-[-0.42px]">
+                    Task
+                  </p>
+                </div>
+                <div class="bg-[#f6f7f8] content-stretch flex h-[34px] items-center px-[12px] py-[8px] relative shrink-0 w-[140px]">
+                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-none min-w-px relative text-[#707a8f] text-[14px] tracking-[-0.42px]">
+                    Lane
+                  </p>
+                </div>
+                <div class="bg-[#f6f7f8] content-stretch flex h-[34px] items-center px-[12px] py-[8px] relative shrink-0 w-[160px]">
+                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-none min-w-px relative text-[#707a8f] text-[14px] tracking-[-0.42px]">
+                    Status
+                  </p>
+                </div>
+                <div class="bg-[#f6f7f8] content-stretch flex h-[34px] items-center px-[12px] py-[8px] relative shrink-0 w-[120px]">
+                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-none min-w-px relative text-[#707a8f] text-[14px] tracking-[-0.42px]">
+                    Date
+                  </p>
+                </div>
+              </div>
+              <div class="content-stretch flex items-start relative shrink-0 w-full" data-name="Data Rows Container">
+                <div class="gcol content-stretch flex flex-[1_0_0] flex-col items-start min-w-px relative" data-name="Pages Container">
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">AIZ_CM and Tommy to decide on which ads to run. Google or Meta</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">AIZ_Fully QC the website</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">AIZ_Set up ads accounts and run Ads</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Follow up Tyler on the webiste for Datafie</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Set up Google Ads</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Build the Service &amp; other pages</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Fix the hero section bassed on the latest dessign</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Connect Google Search Console and PageSpeed Insights</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Connect Google Search Console and PageSpeed Insights</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Connect Google Search Console and PageSpeed Insights</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">[Audit] Duplicate title</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">[Audit] Duplicate title</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">[Audit] Duplicate title</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">[Audit] Duplicate title</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">[Audit] Duplicate title</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">[Audit] Duplicate title</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">[Audit] Duplicate title</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">[Audit] Duplicate title</p></div>
+                </div>
+                <div class="gcol content-stretch flex flex-col items-start relative shrink-0 w-[140px]" data-name="Lane Container">
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#cffce3] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#0cc05a] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Content</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#cffce3] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#0cc05a] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Content</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#cffce3] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#0cc05a] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Content</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#cffce3] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#0cc05a] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Content</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#cffce3] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#0cc05a] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Content</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#cffce3] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#0cc05a] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Content</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#cffce3] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#0cc05a] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Content</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#cffce3] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#0cc05a] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Content</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#cffce3] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#0cc05a] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Content</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#cffce3] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#0cc05a] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Content</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#d6e0f5] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#36c] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Technical</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#d6e0f5] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#36c] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Technical</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#d6e0f5] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#36c] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Technical</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#d6e0f5] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#36c] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Technical</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#d6e0f5] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#36c] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Technical</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#d6e0f5] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#36c] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Technical</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#d6e0f5] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#36c] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Technical</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#d6e0f5] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#36c] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Technical</p></div></div>
+                </div>
+                <div class="gcol content-stretch flex flex-col items-start relative shrink-0 w-[160px]" data-name="Status Container">
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Awaiting Approval</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Completed</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Assigned</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Generated</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Assigned</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Awaiting Approval</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Completed</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Generated</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Assigned</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Awaiting Approval</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Completed</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Generated</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Assigned</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Awaiting Approval</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Completed</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Generated</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Assigned</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Awaiting Approval</p></div>
+                </div>
+                <div class="gcol content-stretch flex flex-col items-start relative shrink-0 w-[120px]" data-name="Date Container">
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">1/5/2026</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">3/14/2026</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">6/23/2026</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">8/9/2026</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">11/30/2026</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">2/28/2026</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">5/12/2026</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">7/4/2026</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">10/21/2026</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">12/15/2026</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">4/1/2026</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">6/7/2026</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">9/2/2026</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">3/25/2026</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">5/30/2026</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">8/18/2026</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">11/9/2026</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">12/28/2026</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- Sidebar nav: navigate (data-nav) or set active ---
+    const navRows = document.querySelectorAll(
+      '[data-name="Navigation Link Container"]:has(> p), [data-name="Section Link Container"]:has(> p)'
+    );
+    function deactivate(row) {
+      row.style.backgroundColor = 'transparent';
+      const label = row.querySelector(':scope > p');
+      if (label) label.style.color = '#2d3139';
+    }
+    function activate(row) {
+      row.style.backgroundColor = '#eeeff2';
+      const label = row.querySelector(':scope > p');
+      if (label) label.style.color = '#36c';
+    }
+    navRows.forEach((row) => {
+      row.addEventListener('click', () => {
+        const dest = row.getAttribute('data-nav');
+        if (dest) { window.location.href = dest; return; }
+        navRows.forEach(deactivate);
+        activate(row);
+      });
+    });
+
+    // --- Notification badge: clear count on click ---
+    const notif = document.querySelector('[data-name="Notification Container"]');
+    const badge = document.querySelector('[data-name="Notification Badge Container"]');
+    if (notif && badge) {
+      notif.addEventListener('click', () => { badge.style.display = 'none'; });
+    }
+
+    // --- Task table: highlight the whole row on hover ---
+    const cols = Array.from(document.querySelectorAll('.gcol'));
+    const grid = cols.map((c) => Array.from(c.querySelectorAll('.gcell')));
+    grid.forEach((cells) => {
+      cells.forEach((cell, rowIndex) => {
+        cell.addEventListener('mouseenter', () => {
+          grid.forEach((col) => { if (col[rowIndex]) col[rowIndex].classList.add('hl'); });
+        });
+        cell.addEventListener('mouseleave', () => {
+          grid.forEach((col) => { if (col[rowIndex]) col[rowIndex].classList.remove('hl'); });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
