@@ -9,16 +9,74 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <style>
-    html, body { margin: 0; padding: 0; background: #e5e7eb; }
-    body { display: flex; justify-content: center; align-items: flex-start; }
-    * { font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
-    .frame { width: 1440px; height: 1024px; }
+    html, body { margin: 0; padding: 0; background: #f4f4f6; }
+    * { font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; box-sizing: border-box; }
+    /* Full-screen frame: fills the whole viewport, no left/right gaps */
+    .frame { width: 100vw; height: 100vh; overflow: hidden; }
+
+    /* ---------- Micro-interactions ---------- */
+    /* Sidebar nav / section links (only leaf rows that contain a direct label) */
+    [data-name="Navigation Link Container"]:has(> p),
+    [data-name="Section Link Container"]:has(> p) {
+      cursor: pointer; border-radius: 8px;
+      transition: background-color .18s ease, transform .08s ease;
+    }
+    [data-name="Navigation Link Container"]:has(> p):hover,
+    [data-name="Section Link Container"]:has(> p):hover { background-color: #f1f2f5; }
+    [data-name="Navigation Link Container"]:has(> p):active,
+    [data-name="Section Link Container"]:has(> p):active { transform: scale(.98); }
+
+    /* Buttons: Run audit, Edit, Remove */
+    .btn { cursor: pointer; transition: filter .18s ease, transform .08s ease, background-color .18s ease, box-shadow .18s ease; }
+    .btn:hover { filter: brightness(.97); }
+    .btn:active { transform: scale(.96); }
+
+    /* Segmented AI-model control */
+    .seg { cursor: pointer; transition: background-color .18s ease, color .18s ease; }
+    .seg:hover { background-color: #eef1f6; }
+
+    /* Stat widget cards lift on hover */
+    [data-name="Widget Content"] { transition: transform .18s ease, box-shadow .18s ease; }
+    [data-name="Widget"]:hover [data-name="Widget Content"] {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(0,0,0,.10) !important;
+    }
+
+    /* Search input */
+    .search-input { outline: none; border: none; background: transparent; padding: 0; width: 100%; }
+    [data-name="Search Bar Group"] { transition: border-color .18s ease, box-shadow .18s ease; }
+    [data-name="Search Bar Group"]:focus-within {
+      border-color: #36c !important;
+      box-shadow: 0 0 0 3px rgba(51,102,204,.14);
+    }
+
+    /* Notification + user menu */
+    [data-name="Notification Container"] { cursor: pointer; transition: background-color .18s ease, transform .08s ease; }
+    [data-name="Notification Container"]:hover { background-color: #f1f2f5; }
+    [data-name="Notification Container"]:active { transform: scale(.94); }
+    [data-name="User Menu"] { cursor: pointer; transition: filter .18s ease, transform .08s ease; }
+    [data-name="User Menu"]:hover { filter: brightness(.95); }
+    [data-name="User Menu"]:active { transform: scale(.94); }
+
+    /* Sidebar collapse toggle in header */
+    [data-name="Header"] [data-name="Frame"] { cursor: pointer; transition: opacity .18s ease; }
+    [data-name="Header"] [data-name="Frame"]:hover { opacity: .6; }
+
+    /* Sidebar scrolls independently on short screens; main content scrolls too */
+    .sidebar-scroll { overflow-y: auto; overflow-x: hidden; }
+    .sidebar-scroll::-webkit-scrollbar { width: 6px; }
+    .sidebar-scroll::-webkit-scrollbar-thumb { background: #dddfe4; border-radius: 3px; }
+    .content-scroll { overflow-y: auto; }
+
+    /* Sparkline gentle draw-in on load */
+    @keyframes sparkFade { from { opacity: 0; transform: translateY(2px); } to { opacity: 1; transform: none; } }
+    [data-name="Sparkline Container"] { animation: sparkFade .5s ease both; }
   </style>
 </head>
 <body>
   <div class="frame">
     <div class="bg-[#f4f4f6] content-stretch flex items-start relative size-full" data-name="Overview">
-      <div class="border-[#dddfe4] border-r border-solid content-stretch flex flex-col h-full items-start overflow-clip relative shrink-0 w-[280px]" data-name="Logo">
+      <div class="sidebar-scroll border-[#dddfe4] border-r border-solid content-stretch flex flex-col h-full items-start relative shrink-0 w-[280px]" data-name="Logo">
         <div class="bg-white border-[#dddfe4] border-b border-solid content-stretch flex gap-[12px] items-center px-[16px] py-[12px] relative shrink-0 w-full" data-name="Header">
           <div class="bg-[#36c] content-stretch flex items-center justify-center p-[10px] relative rounded-[12px] shrink-0 size-[44px]" data-name="Logo Container">
             <p class="[word-break:break-word] font-['Geist'] font-bold leading-[1.2] relative shrink-0 text-[#f9fafb] text-[14px] text-center whitespace-nowrap">
@@ -300,7 +358,7 @@
           </div>
         </div>
       </div>
-      <div class="content-stretch flex flex-col h-full items-start relative shrink-0 w-[1160px]" data-name="Main Content">
+      <div class="content-stretch flex flex-col h-full items-start relative shrink-0 flex-[1_0_0] min-w-px" data-name="Main Content">
         <div class="bg-white border-[#dddfe4] border-b border-solid content-stretch flex h-[68px] items-center justify-between px-[20px] py-[12px] relative shrink-0 w-full" data-name="Top Bar">
           <div class="content-stretch flex gap-[6px] items-center relative shrink-0" data-name="Breadcrumbs">
             <div class="overflow-clip relative shrink-0 size-[14px]" data-name="Frame">
@@ -324,9 +382,7 @@
           </div>
           <div class="content-stretch flex gap-[12px] items-center relative shrink-0 w-[481px]" data-name="Search Bar Container">
             <div class="bg-white border border-[#dddfe4] border-solid content-stretch flex flex-[1_0_0] gap-[10px] items-center min-w-px px-[12px] py-[10px] relative rounded-[8px]" data-name="Search Bar Group">
-              <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-normal leading-[0.9] min-w-px relative text-[#a9afbc] text-[14px]">
-                Search...
-              </p>
+              <input type="text" placeholder="Search..." class="search-input [word-break:break-word] flex-[1_0_0] font-['Geist'] font-normal leading-[0.9] min-w-px relative text-[#2d3139] placeholder:text-[#a9afbc] text-[14px]" />
               <div class="relative shrink-0 size-[20px]" data-name="Frame">
                 <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/95326.svg" />
               </div>
@@ -354,7 +410,7 @@
             </div>
           </div>
         </div>
-        <div class="bg-[#f4f4f6] content-stretch flex flex-[1_0_0] flex-col gap-[20px] items-start min-h-px p-[20px] relative w-full" data-name="Dashboard Content">
+        <div class="content-scroll bg-[#f4f4f6] content-stretch flex flex-[1_0_0] flex-col gap-[20px] items-start min-h-px p-[20px] relative w-full" data-name="Dashboard Content">
           <div class="[word-break:break-word] content-stretch flex flex-col gap-[12px] items-start leading-[0.9] relative rounded-[10px] shrink-0 w-full" data-name="Dashboard Header">
             <p class="font-['Geist'] font-semibold relative shrink-0 text-[#1b1d22] text-[24px] tracking-[-0.96px] w-full">
               Overview
@@ -379,31 +435,31 @@
                 </div>
                 <div class="content-stretch flex gap-[12px] items-center relative shrink-0">
                   <div class="bg-white border border-[#e2e4e9] border-solid content-stretch flex items-center p-[2px] relative rounded-[6px] shrink-0">
-                    <div class="bg-white content-stretch flex items-center px-[6px] py-[2px] relative rounded-[6px] shrink-0">
+                    <div class="seg bg-white content-stretch flex items-center px-[6px] py-[2px] relative rounded-[6px] shrink-0">
                       <p class="[word-break:break-word] font-['Geist'] font-normal leading-[1.5] relative shrink-0 text-[#707a8f] text-[14px] text-center whitespace-nowrap">
                         Flash
                       </p>
                     </div>
-                    <div class="bg-[#eff3fb] content-stretch flex items-center px-[6px] py-[2px] relative rounded-[6px] shrink-0">
+                    <div class="seg bg-[#eff3fb] content-stretch flex items-center px-[6px] py-[2px] relative rounded-[6px] shrink-0">
                       <p class="[word-break:break-word] font-['Geist'] font-medium leading-[1.5] relative shrink-0 text-[#1b1d22] text-[14px] text-center whitespace-nowrap">
                         Pro
                       </p>
                     </div>
-                    <div class="bg-white content-stretch flex items-center px-[6px] py-[2px] relative rounded-[6px] shrink-0">
+                    <div class="seg bg-white content-stretch flex items-center px-[6px] py-[2px] relative rounded-[6px] shrink-0">
                       <p class="[word-break:break-word] font-['Geist'] font-normal leading-[1.5] relative shrink-0 text-[#707a8f] text-[14px] text-center whitespace-nowrap">
                         3.5 Flash
                       </p>
                     </div>
                   </div>
                   <div class="flex flex-row items-center self-stretch">
-                    <div class="bg-white border border-[#e2e4e9] border-solid content-stretch flex h-full items-center px-[14px] py-[2px] relative rounded-[6px] shrink-0">
+                    <div class="btn bg-white border border-[#e2e4e9] border-solid content-stretch flex h-full items-center px-[14px] py-[2px] relative rounded-[6px] shrink-0">
                       <p class="[word-break:break-word] font-['Geist'] font-normal leading-[1.5] relative shrink-0 text-[#707a8f] text-[14px] text-center whitespace-nowrap">
                         Edit
                       </p>
                     </div>
                   </div>
                   <div class="flex flex-row items-center self-stretch">
-                    <div class="bg-[#fef1f9] content-stretch flex gap-[10px] h-full items-center px-[12px] py-[2px] relative rounded-[6px] shrink-0">
+                    <div class="btn bg-[#fef1f9] content-stretch flex gap-[10px] h-full items-center px-[12px] py-[2px] relative rounded-[6px] shrink-0">
                       <p class="[word-break:break-word] font-['Geist'] font-normal leading-[1.5] relative shrink-0 text-[#ec1399] text-[14px] text-center whitespace-nowrap">
                         Remove
                       </p>
@@ -430,7 +486,7 @@
                     <p class="[word-break:break-word] font-['Geist'] font-normal leading-[0.9] relative shrink-0 text-[#707a8f] text-[14px] whitespace-nowrap">
                       19 findings
                     </p>
-                    <div class="bg-[#36c] content-stretch flex gap-[8px] h-[34px] items-center px-[14px] py-[8px] relative rounded-[8px] shrink-0">
+                    <div class="btn bg-[#36c] content-stretch flex gap-[8px] h-[34px] items-center px-[14px] py-[8px] relative rounded-[8px] shrink-0">
                       <div class="relative shrink-0 size-[20px]" data-name="Frame">
                         <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/3031c.svg" />
                       </div>
@@ -525,5 +581,56 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // --- Sidebar nav: click to set the active item ---
+    const navRows = document.querySelectorAll(
+      '[data-name="Navigation Link Container"]:has(> p), [data-name="Section Link Container"]:has(> p)'
+    );
+    function deactivate(row) {
+      row.style.backgroundColor = 'transparent';
+      const label = row.querySelector(':scope > p');
+      if (label) label.style.color = '#2d3139';
+    }
+    function activate(row) {
+      row.style.backgroundColor = '#eeeff2';
+      const label = row.querySelector(':scope > p');
+      if (label) label.style.color = '#36c';
+    }
+    navRows.forEach((row) => {
+      row.addEventListener('click', () => {
+        navRows.forEach(deactivate);
+        activate(row);
+      });
+    });
+
+    // --- AI-model segmented control ---
+    const segs = document.querySelectorAll('.seg');
+    segs.forEach((seg) => {
+      seg.addEventListener('click', () => {
+        segs.forEach((s) => {
+          s.style.backgroundColor = '#ffffff';
+          const p = s.querySelector('p');
+          if (p) { p.style.color = '#707a8f'; p.style.fontWeight = '400'; }
+        });
+        seg.style.backgroundColor = '#eff3fb';
+        const p = seg.querySelector('p');
+        if (p) { p.style.color = '#1b1d22'; p.style.fontWeight = '500'; }
+      });
+    });
+
+    // --- Notification badge: clear count on click ---
+    const notif = document.querySelector('[data-name="Notification Container"]');
+    const badge = document.querySelector('[data-name="Notification Badge Container"]');
+    if (notif && badge) {
+      notif.addEventListener('click', () => { badge.style.display = 'none'; });
+    }
+
+    // --- Buttons: tiny press feedback (ripple-free, transform handled by CSS) ---
+    document.querySelectorAll('.btn').forEach((b) => {
+      b.setAttribute('role', 'button');
+      b.setAttribute('tabindex', '0');
+    });
+  </script>
 </body>
 </html>
