@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Brownies Farm — Search MGKT</title>
+  <title>Brownies Farm — Actionable Item</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet" />
@@ -11,8 +11,6 @@
   <style>
     html, body { margin: 0; padding: 0; background: #f4f4f6; }
     * { font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; box-sizing: border-box; }
-    .gmono { font-family: 'Geist Mono', ui-monospace, SFMono-Regular, monospace; }
-    /* Full-screen frame: fills the whole viewport, no left/right gaps */
     .frame { width: 100vw; height: 100vh; overflow: hidden; }
 
     /* ---------- Micro-interactions ---------- */
@@ -26,7 +24,16 @@
     [data-name="Navigation Link Container"]:has(> p):active,
     [data-name="Section Link Container"]:has(> p):active { transform: scale(.98); }
 
-    /* Search input */
+    .btn { cursor: pointer; transition: filter .18s ease, transform .08s ease, background-color .18s ease, box-shadow .18s ease; }
+    .btn:hover { filter: brightness(.97); background-color: #eceef1; }
+    .btn:active { transform: scale(.96); }
+
+    [data-name="Widget Content"] { transition: transform .18s ease, box-shadow .18s ease; }
+    [data-name="Widget"]:hover [data-name="Widget Content"] {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(0,0,0,.10) !important;
+    }
+
     .search-input { outline: none; border: none; background: transparent; padding: 0; width: 100%; }
     [data-name="Search Bar Group"] { transition: border-color .18s ease, box-shadow .18s ease; }
     [data-name="Search Bar Group"]:focus-within {
@@ -34,7 +41,6 @@
       box-shadow: 0 0 0 3px rgba(51,102,204,.14);
     }
 
-    /* Notification + user menu */
     [data-name="Notification Container"] { cursor: pointer; transition: background-color .18s ease, transform .08s ease; }
     [data-name="Notification Container"]:hover { background-color: #f1f2f5; }
     [data-name="Notification Container"]:active { transform: scale(.94); }
@@ -50,22 +56,21 @@
     .sidebar-scroll::-webkit-scrollbar-thumb { background: #dddfe4; border-radius: 3px; }
     .content-scroll { overflow-y: auto; }
 
-    /* Scorecard hover lift */
-    .scorecard { transition: transform .18s ease, box-shadow .18s ease; }
-    .scorecard:hover { transform: translateY(-3px); box-shadow: 0 8px 18px rgba(0,0,0,.10) !important; }
-
     /* Table row highlight on hover */
     .gcell { transition: background-color .15s ease; }
     .gcell.hl { background-color: #f5f8ff !important; }
 
-    /* Sparkline gentle draw-in on load */
     @keyframes sparkFade { from { opacity: 0; transform: translateY(2px); } to { opacity: 1; transform: none; } }
     .spark { animation: sparkFade .5s ease both; }
+    /* Summary card hover lift */
+    .sf-card { transition: transform .18s ease, box-shadow .18s ease; }
+    [data-name="Summary item"]:hover .sf-card { transform: translateY(-3px); box-shadow: 0 8px 18px rgba(0,0,0,.10) !important; }
+    .gmono { font-family: 'Geist Mono', ui-monospace, SFMono-Regular, monospace; }
   </style>
 </head>
 <body>
   <div class="frame">
-    <div class="bg-[#f4f4f6] content-stretch flex items-start relative size-full" data-name="Search MGKT">
+    <div class="bg-[#f4f4f6] content-stretch flex items-start relative size-full" data-name="Actionable item">
       <div class="sidebar-scroll border-[#dddfe4] border-r border-solid content-stretch flex flex-col h-full items-start relative shrink-0 w-[280px]" data-name="Logo">
         <div class="bg-white border-[#dddfe4] border-b border-solid content-stretch flex gap-[12px] items-center px-[16px] py-[12px] relative shrink-0 w-full" data-name="Header">
           <div class="bg-[#36c] content-stretch flex items-center justify-center p-[10px] relative rounded-[12px] shrink-0 size-[44px]" data-name="Logo Container">
@@ -119,15 +124,15 @@
                   Website
                 </p>
               </div>
-              <div data-nav="search-mgkt.html" class="bg-[#eeeff2] content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative rounded-[8px] shrink-0 w-full" data-name="Navigation Link Container">
+              <div data-nav="search-mgkt.html" class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative shrink-0 w-full" data-name="Navigation Link Container">
                 <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
                   <div class="absolute contents inset-0" data-name="Clip path group">
                     <div class="absolute inset-[5.29%_5.07%_5.25%_5.08%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.017px_-1.058px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
-                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/27a75.svg" />
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/460ba.svg" />
                     </div>
                   </div>
                 </div>
-                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#36c] text-[14px]">
+                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#2d3139] text-[14px]">
                   Search MGKT
                 </p>
               </div>
@@ -196,15 +201,15 @@
                   Brand Brief
                 </p>
               </div>
-              <div data-nav="actionable-item.html" class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative shrink-0 w-full" data-name="Section Link Container">
+              <div data-nav="actionable-item.html" class="bg-[#eeeff2] content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative rounded-[8px] shrink-0 w-full" data-name="Section Link Container">
                 <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
                   <div class="absolute contents inset-0" data-name="Clip path group">
                     <div class="absolute inset-[11.47%_9.37%_11.46%_9.39%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.877px_-2.293px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
-                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/106ed.svg" />
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/5dbcc.svg" />
                     </div>
                   </div>
                 </div>
-                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#2d3139] text-[14px]">
+                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#36c] text-[14px]">
                   Actionable Item
                 </p>
               </div>
@@ -360,14 +365,8 @@
                 </div>
               </div>
             </div>
-            <p class="[word-break:break-word] font-['Geist'] font-medium leading-[0.9] relative shrink-0 text-[#8d95a5] text-[14px] whitespace-nowrap">
-              Marketing Channels
-            </p>
-            <div class="relative shrink-0 size-[12px]" data-name="Frame">
-              <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/c9c7a.svg" />
-            </div>
             <p class="[word-break:break-word] font-['Geist'] font-medium leading-[0.9] relative shrink-0 text-[#2d3139] text-[14px] whitespace-nowrap">
-              Search MGKT
+              Connection
             </p>
           </div>
           <div class="content-stretch flex gap-[12px] items-center relative shrink-0 w-[481px]" data-name="Search Bar Container">
@@ -401,278 +400,138 @@
           </div>
         </div>
         <div class="content-scroll bg-[#f4f4f6] content-stretch flex flex-[1_0_0] flex-col gap-[20px] items-start min-h-px p-[20px] relative w-full" data-name="Dashboard Content">
-          <div class="[word-break:break-word] content-stretch flex flex-col gap-[12px] items-start leading-[0.9] relative rounded-[10px] shrink-0 w-full" data-name="Dashboard Header">
+          <div class="[word-break:break-word] content-stretch flex flex-col gap-[12px] items-start leading-[0.9] relative shrink-0 w-full">
             <p class="font-['Geist'] font-semibold relative shrink-0 text-[#1b1d22] text-[24px] tracking-[-0.96px] w-full">
-              Search MGKT
+              Actionable Item
             </p>
             <p class="font-['Geist'] font-normal relative shrink-0 text-[#707a8f] text-[14px] w-full">
-              Keyword performance from Google Search Console — clicks, impressions, CTR, and average position per query
+              Data sources reading aizonemarketing.io. No need to change — just moved to its own page.
             </p>
           </div>
-          <div class="bg-[#f4f4f6] border border-[#e2e4e9] border-solid content-stretch flex flex-col gap-[6px] items-start p-[6px] relative rounded-[12px] shrink-0 w-full" data-name="Scorecard Container">
-            <div class="[word-break:break-word] content-stretch flex items-center justify-between leading-[1.2] px-[12px] py-[4px] relative shrink-0 w-full whitespace-nowrap">
+          <div class="bg-[#f4f4f6] border border-[#e2e4e9] border-solid content-stretch flex flex-col gap-[6px] items-start p-[6px] relative rounded-[12px] shrink-0 w-full" data-name="Container">
+            <div class="[word-break:break-word] content-stretch flex items-center justify-between leading-[1.2] px-[12px] py-[4px] relative shrink-0 w-full whitespace-nowrap" data-name="Header">
               <p class="font-['Geist'] font-semibold relative shrink-0 text-[#2d3139] text-[18px] tracking-[-0.54px]">
-                GSC — Search Queries
+                Screaming Frog — Site Audit
               </p>
               <p class="gmono font-medium relative shrink-0 text-[#8d95a5] text-[14px] tracking-[-0.56px]">
-                28 Agu → 25 Sep 2026 · 4 baris
+                Data as of Sep 28, 2026 · 478 pages · scheduled crawl
               </p>
             </div>
-            <div class="bg-white content-stretch drop-shadow-[0px_2px_1px_rgba(0,0,0,0.07)] flex flex-col gap-[14px] items-start justify-center p-[20px] relative rounded-[12px] shrink-0 w-full">
-              <div class="content-stretch flex gap-[14px] items-center relative shrink-0 w-full">
+            <div class="bg-white content-stretch drop-shadow-[0px_2px_1px_rgba(0,0,0,0.07)] flex flex-col gap-[14px] items-start justify-center p-[20px] relative rounded-[12px] shrink-0 w-full" data-name="Main content">
+              <div class="content-stretch flex gap-[14px] items-center relative shrink-0 w-full" data-name="Summary container">
                 <div class="flex flex-[1_0_0] flex-row items-center self-stretch">
-                  <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] flex-col gap-[6px] h-full items-start min-w-px p-[4px] relative rounded-[8px]">
+                  <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] flex-col gap-[6px] h-full items-start min-w-px p-[4px] relative rounded-[8px]" data-name="Summary item">
                     <div class="content-stretch flex items-center justify-center px-[12px] py-[4px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#707a8f] text-[14px]">
-                        Clicks
-                      </p>
+                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#707a8f] text-[14px]">All</p>
                     </div>
-                    <div class="scorecard bg-white border border-[#eeeff2] border-solid content-stretch flex gap-[10px] items-center justify-center px-[12px] py-[14px] relative rounded-[8px] shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-bold leading-none min-w-px relative text-[#1b1d22] text-[28px] tracking-[-0.56px]">
-                        0
-                      </p>
+                    <div class="sf-card bg-white border border-[#eeeff2] border-solid content-stretch flex gap-[10px] items-center justify-center px-[12px] py-[14px] relative rounded-[8px] shrink-0 w-full" data-name="Summary details">
+                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-bold leading-none min-w-px relative text-[#1b1d22] text-[28px] tracking-[-0.56px]">12</p>
                       <div class="h-[30px] relative shrink-0 w-[55px]">
-                        <div class="spark absolute inset-[-1.67%_-0.91%_0_-0.91%]">
-                          <img alt="" class="block max-w-none size-full" src="./assets/78045.svg" />
-                        </div>
+                        <div class="spark absolute inset-[-1.67%_-0.91%_0_-0.91%]"><img alt="" class="block max-w-none size-full" src="./assets/78045.svg" /></div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start min-w-px p-[4px] relative rounded-[8px]">
-                  <div class="content-stretch flex gap-[4px] items-center justify-center px-[12px] py-[4px] relative shrink-0 w-full">
-                    <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#707a8f] text-[14px]">
-                      Impression
-                    </p>
-                    <div class="relative shrink-0 size-[18px]" data-name="Frame">
-                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/837cb.svg" />
-                    </div>
-                    <p class="[word-break:break-word] font-['Geist'] font-medium leading-[0.9] relative shrink-0 text-[#0dc55c] text-[12px] whitespace-nowrap">
-                      66%
-                    </p>
-                    <p class="[word-break:break-word] font-['Geist'] font-medium leading-[0.9] relative shrink-0 text-[#8d95a5] text-[12px] whitespace-nowrap">
-                      vs prev
-                    </p>
+                <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start min-w-px p-[4px] relative rounded-[8px]" data-name="Summary item">
+                  <div class="content-stretch flex items-center justify-center px-[12px] py-[4px] relative shrink-0 w-full">
+                    <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#707a8f] text-[14px]">Error</p>
                   </div>
-                  <div class="scorecard bg-white border border-[#eeeff2] border-solid content-stretch flex gap-[10px] items-center justify-center px-[12px] py-[14px] relative rounded-[8px] shrink-0 w-full">
-                    <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-bold leading-none min-w-px relative text-[#1b1d22] text-[28px] tracking-[-0.56px]">
-                      193
-                    </p>
+                  <div class="sf-card bg-white border border-[#eeeff2] border-solid content-stretch flex gap-[10px] items-center justify-center px-[12px] py-[14px] relative rounded-[8px] shrink-0 w-full" data-name="Summary details">
+                    <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-bold leading-none min-w-px relative text-[#ec1399] text-[28px] tracking-[-0.56px]">2</p>
                     <div class="h-[30px] relative shrink-0 w-[55px]">
-                      <div class="spark absolute inset-[-1.67%_-0.91%_0_-0.91%]">
-                        <img alt="" class="block max-w-none size-full" src="./assets/78045.svg" />
-                      </div>
+                      <div class="spark absolute inset-[-1.67%_-0.91%_0_-0.91%]"><img alt="" class="block max-w-none size-full" src="./assets/78045.svg" /></div>
                     </div>
                   </div>
                 </div>
                 <div class="flex flex-[1_0_0] flex-row items-center self-stretch">
-                  <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] flex-col gap-[6px] h-full items-start min-w-px p-[4px] relative rounded-[8px]">
+                  <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] flex-col gap-[6px] h-full items-start min-w-px p-[4px] relative rounded-[8px]" data-name="Summary item">
                     <div class="content-stretch flex items-center justify-center px-[12px] py-[4px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#707a8f] text-[14px]">
-                        CTR
-                      </p>
+                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#707a8f] text-[14px]">Warning</p>
                     </div>
-                    <div class="scorecard bg-white border border-[#eeeff2] border-solid content-stretch flex gap-[10px] items-center justify-center px-[12px] py-[14px] relative rounded-[8px] shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-bold leading-none min-w-px relative text-[#1b1d22] text-[28px] tracking-[-0.56px]">
-                        0.0%
-                      </p>
+                    <div class="sf-card bg-white border border-[#eeeff2] border-solid content-stretch flex gap-[10px] items-center justify-center px-[12px] py-[14px] relative rounded-[8px] shrink-0 w-full" data-name="Summary details">
+                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-bold leading-none min-w-px relative text-[#eca713] text-[28px] tracking-[-0.56px]">4</p>
                       <div class="h-[30px] relative shrink-0 w-[55px]">
-                        <div class="spark absolute inset-[-1.67%_-0.91%_0_-0.91%]">
-                          <img alt="" class="block max-w-none size-full" src="./assets/78045.svg" />
-                        </div>
+                        <div class="spark absolute inset-[-1.67%_-0.91%_0_-0.91%]"><img alt="" class="block max-w-none size-full" src="./assets/78045.svg" /></div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start min-w-px p-[4px] relative rounded-[8px]">
-                  <div class="content-stretch flex gap-[4px] items-center justify-center px-[12px] py-[4px] relative shrink-0 w-full">
-                    <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#707a8f] text-[14px]">
-                      AVG Position
-                    </p>
-                    <div class="relative shrink-0 size-[18px]" data-name="Frame">
-                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/837cb.svg" />
-                    </div>
-                    <p class="[word-break:break-word] font-['Geist'] font-medium leading-[0.9] relative shrink-0 text-[#0dc55c] text-[12px] whitespace-nowrap">
-                      55%
-                    </p>
-                    <p class="[word-break:break-word] font-['Geist'] font-medium leading-[0.9] relative shrink-0 text-[#8d95a5] text-[12px] whitespace-nowrap">
-                      vs prev
-                    </p>
+                <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start min-w-px p-[4px] relative rounded-[8px]" data-name="Summary item">
+                  <div class="content-stretch flex items-center justify-center px-[12px] py-[4px] relative shrink-0 w-full">
+                    <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#707a8f] text-[14px]">Notices</p>
                   </div>
-                  <div class="scorecard bg-white border border-[#eeeff2] border-solid content-stretch flex gap-[10px] items-center justify-center px-[12px] py-[14px] relative rounded-[8px] shrink-0 w-full">
-                    <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-bold leading-none min-w-px relative text-[#1b1d22] text-[28px] tracking-[-0.56px]">
-                      13.5
-                    </p>
+                  <div class="sf-card bg-white border border-[#eeeff2] border-solid content-stretch flex gap-[10px] items-center justify-center px-[12px] py-[14px] relative rounded-[8px] shrink-0 w-full" data-name="Summary details">
+                    <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-bold leading-none min-w-px relative text-[#1b1d22] text-[28px] tracking-[-0.56px]">0</p>
                     <div class="h-[30px] relative shrink-0 w-[55px]">
-                      <div class="spark absolute inset-[-1.67%_-0.91%_0_-0.91%]">
-                        <img alt="" class="block max-w-none size-full" src="./assets/78045.svg" />
-                      </div>
+                      <div class="spark absolute inset-[-1.67%_-0.91%_0_-0.91%]"><img alt="" class="block max-w-none size-full" src="./assets/78045.svg" /></div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="bg-white border border-[#e2e4e9] border-solid content-stretch flex flex-col items-start overflow-clip relative rounded-[8px] shrink-0 w-full">
-                <div class="bg-white content-stretch flex items-center relative shrink-0 w-full">
-                  <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] h-[34px] items-center min-w-px px-[12px] py-[8px] relative">
-                    <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-none min-w-px relative text-[#707a8f] text-[14px] tracking-[-0.42px]">
-                      Query
-                    </p>
-                  </div>
-                  <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] h-[34px] items-center min-w-px px-[12px] py-[8px] relative">
-                    <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-none min-w-px relative text-[#707a8f] text-[14px] tracking-[-0.42px]">
-                      Page
-                    </p>
-                  </div>
-                  <div class="bg-[#f6f7f8] content-stretch flex h-[34px] items-center px-[12px] py-[8px] relative shrink-0 w-[130px]">
-                    <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-none min-w-px relative text-[#707a8f] text-[14px] tracking-[-0.42px]">
-                      Clicks
-                    </p>
-                  </div>
-                  <div class="bg-[#f6f7f8] content-stretch flex h-[34px] items-center px-[12px] py-[8px] relative shrink-0 w-[130px]">
-                    <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-none min-w-px relative text-[#707a8f] text-[14px] tracking-[-0.42px]">
-                      Impr.
-                    </p>
-                  </div>
-                  <div class="bg-[#f6f7f8] content-stretch flex h-[34px] items-center px-[12px] py-[8px] relative shrink-0 w-[120px]">
-                    <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-none min-w-px relative text-[#707a8f] text-[14px] tracking-[-0.42px]">
-                      CTR
-                    </p>
-                  </div>
-                  <div class="bg-[#f6f7f8] content-stretch flex h-[34px] items-center px-[12px] py-[8px] relative shrink-0 w-[100px]">
-                    <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-none min-w-px relative text-[#707a8f] text-[14px] tracking-[-0.42px]">
-                      Position
-                    </p>
-                  </div>
+              <div class="bg-white border border-[#e2e4e9] border-solid content-stretch flex flex-col items-start overflow-clip relative rounded-[8px] shrink-0 w-full" data-name="Details container">
+                <div class="bg-white content-stretch flex items-center relative shrink-0 w-full" data-name="Details header">
+                <div class="bg-[#f6f7f8] content-stretch flex h-[34px] items-center px-[12px] py-[8px] relative shrink-0 w-[140px]"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-none min-w-px relative text-[#707a8f] text-[14px] tracking-[-0.42px]">Level</p></div>
+                <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] h-[34px] items-center min-w-px px-[12px] py-[8px] relative"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-none min-w-px relative text-[#707a8f] text-[14px] tracking-[-0.42px]">Errors</p></div>
+                <div class="bg-[#f6f7f8] content-stretch flex h-[34px] items-center px-[12px] py-[8px] relative shrink-0 w-[140px]"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-none min-w-px relative text-[#707a8f] text-[14px] tracking-[-0.42px]"> 14 passed</p></div>
+                <div class="bg-[#f6f7f8] content-stretch flex h-[34px] items-center px-[12px] py-[8px] relative shrink-0 w-[140px]"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-none min-w-px relative text-[#707a8f] text-[14px] tracking-[-0.42px]">Send to</p></div>
+                <div class="bg-[#f6f7f8] content-stretch flex h-[34px] items-center px-[12px] py-[8px] relative shrink-0 w-[140px]"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-none min-w-px relative text-[#707a8f] text-[14px] tracking-[-0.42px]">Status</p></div>
                 </div>
-                <div class="content-stretch flex items-center relative shrink-0 w-full">
-                  <div class="gcol content-stretch flex flex-[1_0_0] flex-col items-start min-w-px relative">
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">
-                        ai zone
-                      </p>
-                    </div>
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">
-                        ai zone
-                      </p>
-                    </div>
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">
-                        ai zone
-                      </p>
-                    </div>
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">
-                        a2i marketing center
-                      </p>
-                    </div>
+                <div class="content-stretch flex items-center relative shrink-0 w-full" data-name="Details list">
+                  <div class="gcol content-stretch flex flex-col items-start relative shrink-0 w-[140px]" data-name="Level list">
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#fbedd0] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#bc8610] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Warning</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#fbedd0] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#bc8610] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Warning</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#fbedd0] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#bc8610] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Warning</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#fbd0eb] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#c3107f] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Error</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#fbd0eb] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#c3107f] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Error</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#fbd0eb] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#c3107f] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Error</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#cffce3] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#0cc05a] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Notice</p></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#cffce3] content-stretch flex items-center justify-center px-[6px] py-[4px] relative rounded-[4px] shrink-0"><p class="[word-break:break-word] font-['Geist'] font-medium leading-none overflow-hidden relative shrink-0 text-[#0cc05a] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Notice</p></div></div>
                   </div>
-                  <div class="gcol content-stretch flex flex-[1_0_0] flex-col items-start min-w-px relative">
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">https://aizonemarketing.io/</p>
-                    </div>
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">https://aizonemarketing.io/</p>
-                    </div>
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">https://aizonemarketing.io/</p>
-                    </div>
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">https://aizonemarketing.io/</p>
-                    </div>
+                  <div class="gcol content-stretch flex flex-[1_0_0] flex-col items-start min-w-px relative" data-name="Issue list">
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Non-indexable pages</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Low-content pages (&lt;200 kata)</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">3xx redirects</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Non-indexable pages</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Missing meta description</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">4xx client errors</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Title over 60 characters</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Slow pages (&gt;1s)</p></div>
                   </div>
-                  <div class="gcol content-stretch flex flex-col items-start relative shrink-0 w-[130px]">
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">
-                        0
-                      </p>
-                    </div>
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">
-                        0
-                      </p>
-                    </div>
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">
-                        0
-                      </p>
-                    </div>
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">
-                        0
-                      </p>
-                    </div>
+                  <div class="gcol content-stretch flex flex-col items-start relative shrink-0 w-[140px]" data-name="Count list">
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#f1f2f4] content-stretch flex flex-[1_0_0] flex-col h-[8px] items-start min-w-px relative rounded-[90px]"><div class="bg-[#ec1399] flex-[1_0_0] min-h-px relative rounded-[90px] w-[48px]"></div></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#f1f2f4] content-stretch flex flex-[1_0_0] flex-col h-[8px] items-start min-w-px relative rounded-[90px]"><div class="bg-[#ec1399] flex-[1_0_0] min-h-px relative rounded-[90px] w-[48px]"></div></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#f1f2f4] content-stretch flex flex-[1_0_0] flex-col h-[8px] items-start min-w-px relative rounded-[90px]"><div class="bg-[#ec1399] flex-[1_0_0] min-h-px relative rounded-[90px] w-[76px]"></div></div></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex h-[33px] items-center px-[12px] py-[8px] relative shrink-0 w-full"><div class="bg-[#f1f2f4] content-stretch flex flex-[1_0_0] flex-col h-[8px] items-start min-w-px relative rounded-[90px]"><div class="bg-[#ec1399] flex-[1_0_0] min-h-px relative rounded-[90px] w-[39px]"></div></div></div>
                   </div>
-                  <div class="gcol content-stretch flex flex-col items-start relative shrink-0 w-[130px]">
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">
-                        37
-                      </p>
-                    </div>
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">
-                        5
-                      </p>
-                    </div>
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">
-                        91
-                      </p>
-                    </div>
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">
-                        68
-                      </p>
-                    </div>
+                  <div class="gcol content-stretch flex flex-col items-start relative shrink-0 w-[140px]" data-name="Count list">
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">98 (21%)</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">204 (45%)</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">76 (17%)</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">189 (41%)</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">133 (29%)</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">220 (48%)</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">87 (19%)</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">165 (36%)</p></div>
                   </div>
-                  <div class="gcol content-stretch flex flex-col items-start relative shrink-0 w-[120px]">
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">
-                        57%
-                      </p>
-                    </div>
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">
-                        93%
-                      </p>
-                    </div>
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">
-                        42%
-                      </p>
-                    </div>
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">
-                        61%
-                      </p>
-                    </div>
-                  </div>
-                  <div class="gcol content-stretch flex flex-col items-start relative shrink-0 w-[100px]">
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">
-                        7.3
-                      </p>
-                    </div>
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">
-                        19.8
-                      </p>
-                    </div>
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">
-                        3.5
-                      </p>
-                    </div>
-                    <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full">
-                      <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">
-                        14.2
-                      </p>
-                    </div>
+                  <div class="gcol content-stretch flex flex-col items-start relative shrink-0 w-[140px]" data-name="Status list">
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">✓ Task created</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">✓ Task created</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Send to tech</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Send to tech</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Send to tech</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Send to tech</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Send to tech</p></div>
+                  <div class="gcell bg-white border-[#e2e4e9] border-b border-solid content-stretch flex items-center px-[12px] py-[8px] relative shrink-0 w-full"><p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px overflow-hidden relative text-[#2d3139] text-[14px] text-ellipsis tracking-[-0.42px] whitespace-nowrap">Send to tech</p></div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        
         </div>
       </div>
     </div>
@@ -709,7 +568,7 @@
       notif.addEventListener('click', () => { badge.style.display = 'none'; });
     }
 
-    // --- GSC table: highlight the whole row on hover ---
+    // --- Task table: highlight the whole row on hover ---
     const cols = Array.from(document.querySelectorAll('.gcol'));
     const grid = cols.map((c) => Array.from(c.querySelectorAll('.gcell')));
     grid.forEach((cells) => {
