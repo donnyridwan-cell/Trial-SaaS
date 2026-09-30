@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Browning Law Firm — Connection</title>
+  <title>Browning Law Firm — Reports</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet" />
@@ -13,7 +13,6 @@
     * { font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; box-sizing: border-box; }
     .frame { width: 100vw; height: 100vh; overflow: hidden; }
 
-    /* ---------- Micro-interactions ---------- */
     [data-name="Navigation Link Container"]:has(> p),
     [data-name="Section Link Container"]:has(> p) {
       cursor: pointer; border-radius: 8px;
@@ -24,18 +23,9 @@
     [data-name="Navigation Link Container"]:has(> p):active,
     [data-name="Section Link Container"]:has(> p):active { transform: scale(.98); }
 
-    .btn { cursor: pointer; transition: filter .18s ease, transform .08s ease, background-color .18s ease, box-shadow .18s ease; }
-    .btn:hover { background-color: #eceef1; }
+    .btn { cursor: pointer; transition: filter .18s ease, transform .08s ease, box-shadow .18s ease; }
+    .btn:hover { filter: brightness(.96); box-shadow: 0 4px 12px rgba(51,102,204,.25); }
     .btn:active { transform: scale(.96); }
-
-    /* Connection cards lift on hover */
-    .conn-card { transition: transform .18s ease, box-shadow .18s ease; }
-    [data-name="Widget"]:hover .conn-card { transform: translateY(-3px); box-shadow: 0 8px 18px rgba(0,0,0,.10) !important; }
-
-    /* Action links */
-    .act { cursor: pointer; }
-    .act p { transition: color .15s ease; }
-    .act:hover p { color: #36c; }
 
     .search-input { outline: none; border: none; background: transparent; padding: 0; width: 100%; }
     [data-name="Search Bar Group"] { transition: border-color .18s ease, box-shadow .18s ease; }
@@ -55,11 +45,13 @@
     .sidebar-scroll::-webkit-scrollbar { width: 6px; }
     .sidebar-scroll::-webkit-scrollbar-thumb { background: #dddfe4; border-radius: 3px; }
     .content-scroll { overflow-y: auto; }
+    .report-row { cursor: pointer; transition: background-color .15s ease; }
+    .report-row:hover { background-color: #f6f9ff; }
   </style>
 </head>
 <body>
   <div class="frame">
-    <div class="bg-[#f4f4f6] content-stretch flex items-start relative size-full" data-name="Connection">
+    <div class="bg-[#f4f4f6] content-stretch flex items-start relative size-full" data-name="Reports (Default)">
       <div class="sidebar-scroll border-[#dddfe4] border-r border-solid content-stretch flex flex-col h-full items-start relative shrink-0 w-[280px]" data-name="Logo">
         <div class="bg-white border-[#dddfe4] border-b border-solid content-stretch flex gap-[12px] items-center px-[16px] py-[12px] relative shrink-0 w-full" data-name="Header">
           <div class="bg-[#36c] content-stretch flex items-center justify-center p-[10px] relative rounded-[12px] shrink-0 size-[44px]" data-name="Logo Container">
@@ -233,15 +225,15 @@
                   Strategies
                 </p>
               </div>
-              <div data-nav="reports.html" class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative shrink-0 w-full" data-name="Section Link Container">
+              <div data-nav="reports.html" class="bg-[#eeeff2] content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative rounded-[8px] shrink-0 w-full" data-name="Section Link Container">
                 <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
                   <div class="absolute contents inset-0" data-name="Clip path group">
                     <div class="absolute inset-[5.21%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.042px_-1.042px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
-                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/d5f92.svg" />
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/b9cb8.svg" />
                     </div>
                   </div>
                 </div>
-                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#2d3139] text-[14px]">
+                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#36c] text-[14px]">
                   Reports
                 </p>
               </div>
@@ -252,15 +244,15 @@
               Settings
             </p>
             <div class="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Section Links">
-              <div data-nav="connection.html" class="bg-[#eeeff2] content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative rounded-[8px] shrink-0 w-full" data-name="Section Link Container">
+              <div data-nav="connection.html" class="content-stretch flex gap-[8px] items-center px-[12px] py-[8px] relative rounded-[8px] shrink-0 w-full" data-name="Section Link Container">
                 <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
                   <div class="absolute contents inset-0" data-name="Clip path group">
                     <div class="absolute inset-[5.21%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.042px_-1.042px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
-                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/e4e86.svg" />
+                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/9cd63.svg" />
                     </div>
                   </div>
                 </div>
-                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#36c] text-[14px]">
+                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[1.2] min-w-px relative text-[#1b1d22] text-[14px]">
                   Connection
                 </p>
               </div>
@@ -354,14 +346,11 @@
                 </div>
               </div>
             </div>
-            <p class="[word-break:break-word] font-['Geist'] font-medium leading-[0.9] relative shrink-0 text-[#8d95a5] text-[14px] whitespace-nowrap">
-              Settings
-            </p>
             <div class="relative shrink-0 size-[12px]" data-name="Frame">
               <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/c9c7a.svg" />
             </div>
             <p class="[word-break:break-word] font-['Geist'] font-medium leading-[0.9] relative shrink-0 text-[#2d3139] text-[14px] whitespace-nowrap">
-              Connection
+              Reports
             </p>
           </div>
           <div class="content-stretch flex gap-[12px] items-center relative shrink-0 w-[481px]" data-name="Search Bar Container">
@@ -395,283 +384,91 @@
           </div>
         </div>
         <div class="content-scroll bg-[#f4f4f6] content-stretch flex flex-[1_0_0] flex-col gap-[20px] items-start min-h-px p-[20px] relative w-full" data-name="Dashboard Content">
-          <div class="content-stretch flex gap-[12px] items-center relative rounded-[10px] shrink-0 w-full" data-name="Dashboard Header">
+          <div class="content-stretch flex gap-[12px] items-center relative shrink-0 w-full">
             <div class="[word-break:break-word] content-stretch flex flex-[1_0_0] flex-col gap-[12px] items-start leading-[0.9] min-w-px relative">
               <p class="font-['Geist'] font-semibold relative shrink-0 text-[#1b1d22] text-[24px] tracking-[-0.96px] w-full">
-                Connections
+                Reports
               </p>
               <p class="font-['Geist'] font-normal relative shrink-0 text-[#707a8f] text-[14px] w-full">
                 Data sources reading aizonemarketing.io. No need to change — just moved to its own page.
               </p>
             </div>
-            <div class="btn bg-[#f4f4f6] border border-[#dddfe4] border-solid content-stretch flex gap-[8px] h-[34px] items-center justify-center px-[14px] py-[8px] relative rounded-[8px] shrink-0">
-              <p class="[word-break:break-word] font-['Geist'] font-medium leading-[0.9] relative shrink-0 text-[#707a8f] text-[14px] whitespace-nowrap">
-                Test All Connection
+            <div class="btn bg-[#36c] content-stretch flex gap-[8px] h-[34px] items-center px-[14px] py-[8px] relative rounded-[8px] shrink-0">
+              <p class="[word-break:break-word] font-['Geist'] font-medium leading-[0.9] relative shrink-0 text-[14px] text-white whitespace-nowrap">
+                Create New Report
               </p>
-              <div class="relative shrink-0 size-[18px]" data-name="Frame">
-                <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/53eee.svg" />
-              </div>
-            </div>
-          </div>
-          <div class="bg-white border border-[#e2e4e9] border-solid content-stretch flex flex-col gap-[20px] items-start p-[20px] relative rounded-[12px] shrink-0 w-full" data-name="Widget Container">
-            <div class="content-stretch flex gap-[20px] items-start relative shrink-0 w-full">
-              <!-- GA4 -->
-              <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start min-w-px p-[4px] relative rounded-[8px]" data-name="Widget">
-                <div class="content-stretch flex gap-[8px] items-center justify-center px-[12px] py-[6px] relative shrink-0 w-full" data-name="Widget Header">
-                  <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
-                    <div class="absolute contents inset-0" data-name="Clip path group">
-                      <div class="absolute inset-[8.33%_8.37%_8.33%_8.33%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.667px_-1.667px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
-                        <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/17a97.svg" />
-                      </div>
-                    </div>
+              <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
+                <div class="absolute contents inset-0" data-name="Clip path group">
+                  <div class="absolute inset-[21.88%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-4.375px_-4.375px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
+                    <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/c3b18.svg" />
                   </div>
-                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#1b1d22] text-[16px]">
-                    GA4 -Google Analytics 4
-                  </p>
-                  <div class="relative shrink-0 size-[8px]">
-                    <div class="absolute inset-[-37.5%]">
-                      <img alt="" class="block max-w-none size-full" src="./assets/dc9f4.svg" />
-                    </div>
-                  </div>
-                </div>
-                <div class="conn-card bg-white content-stretch flex flex-col gap-[14px] items-start overflow-clip px-[12px] py-[14px] relative rounded-[8px] shadow-[0px_2px_2px_0px_rgba(0,0,0,0.07)] shrink-0 w-full" data-name="Widget Content">
-                  <div class="content-stretch flex flex-col gap-[10px] items-start relative shrink-0 w-full">
-                    <div class="[word-break:break-word] content-stretch flex font-['Geist'] font-medium gap-[4px] items-start leading-[1.5] relative shrink-0 text-[14px] tracking-[-0.28px] whitespace-nowrap">
-                      <p class="relative shrink-0 text-[#707a8f]">Last sync:</p>
-                      <p class="relative shrink-0 text-[#363b45]">About 3 hours ago</p>
-                    </div>
-                    <div class="bg-[#e2fdee] content-stretch flex items-center justify-center px-[12px] py-[6px] relative rounded-[90px] shrink-0">
-                      <p class="[word-break:break-word] font-['Geist'] font-medium leading-[1.2] relative shrink-0 text-[#0dc55c] text-[14px] tracking-[-0.28px] whitespace-nowrap">Google account linked</p>
-                    </div>
-                  </div>
-                  <div class="h-0 relative shrink-0 w-full">
-                    <div class="absolute inset-[-1px_0_0_0]"><img alt="" class="block max-w-none size-full" src="./assets/72e06.svg" /></div>
-                  </div>
-                  <div class="content-stretch flex gap-[18px] items-center relative shrink-0 w-full">
-                    <div class="act content-stretch flex gap-[6px] items-center relative shrink-0">
-                      <p class="[word-break:break-word] font-['Geist'] font-medium leading-[1.5] relative shrink-0 text-[#707a8f] text-[14px] tracking-[-0.28px] whitespace-nowrap">Test</p>
-                      <div class="overflow-clip relative shrink-0 size-[16px]" data-name="Frame"><div class="absolute contents inset-0"><div class="absolute inset-[11.38%_13.5%_11.33%_13.54%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-2.167px_-1.82px] mask-size-[16px_16px]" style="mask-image:url('./assets/02dd6.svg');-webkit-mask-image:url('./assets/02dd6.svg')"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/def25.svg" /></div></div></div>
-                    </div>
-                    <div class="act content-stretch flex gap-[6px] items-center relative shrink-0">
-                      <p class="[word-break:break-word] font-['Geist'] font-medium leading-[1.5] relative shrink-0 text-[#707a8f] text-[14px] tracking-[-0.28px] whitespace-nowrap">Configure</p>
-                      <div class="overflow-clip relative shrink-0 size-[16px]" data-name="Frame"><div class="absolute contents inset-0"><div class="absolute inset-[7.55%_5.12%_7.52%_5.21%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-0.833px_-1.208px] mask-size-[16px_16px]" style="mask-image:url('./assets/02dd6.svg');-webkit-mask-image:url('./assets/02dd6.svg')"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/0e051.svg" /></div></div></div>
-                    </div>
-                    <div class="act content-stretch flex gap-[6px] items-center relative shrink-0">
-                      <p class="[word-break:break-word] font-['Geist'] font-medium leading-[1.5] relative shrink-0 text-[#707a8f] text-[14px] tracking-[-0.28px] whitespace-nowrap">Disconnect</p>
-                      <div class="relative shrink-0 size-[16px]" data-name="fluent:plug-disconnected-16-regular"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/b49a4.svg" /></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- GSC -->
-              <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start min-w-px p-[4px] relative rounded-[8px]" data-name="Widget">
-                <div class="content-stretch flex gap-[8px] items-center justify-center px-[12px] py-[6px] relative shrink-0 w-full" data-name="Widget Header">
-                  <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
-                    <div class="absolute contents inset-0" data-name="Clip path group">
-                      <div class="absolute inset-[6.83%_6.62%_6.83%_6.67%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.333px_-1.366px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
-                        <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/99c3b.svg" />
-                      </div>
-                    </div>
-                  </div>
-                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#1b1d22] text-[16px]">
-                    GSC-Google Search Console
-                  </p>
-                  <div class="relative shrink-0 size-[8px]">
-                    <div class="absolute inset-[-37.5%]"><img alt="" class="block max-w-none size-full" src="./assets/dc9f4.svg" /></div>
-                  </div>
-                </div>
-                <div class="conn-card bg-white content-stretch flex flex-col gap-[14px] items-start overflow-clip px-[12px] py-[14px] relative rounded-[8px] shadow-[0px_2px_2px_0px_rgba(0,0,0,0.07)] shrink-0 w-full" data-name="Widget Content">
-                  <div class="content-stretch flex flex-col gap-[10px] items-start relative shrink-0 w-full">
-                    <div class="[word-break:break-word] content-stretch flex font-['Geist'] font-medium gap-[4px] items-start leading-[1.5] relative shrink-0 text-[14px] tracking-[-0.28px] whitespace-nowrap">
-                      <p class="relative shrink-0 text-[#707a8f]">Last sync:</p>
-                      <p class="relative shrink-0 text-[#363b45]">About 18 hours ago</p>
-                    </div>
-                    <div class="bg-[#e2fdee] content-stretch flex items-center justify-center px-[12px] py-[6px] relative rounded-[90px] shrink-0">
-                      <p class="[word-break:break-word] font-['Geist'] font-medium leading-[1.2] relative shrink-0 text-[#0dc55c] text-[14px] tracking-[-0.28px] whitespace-nowrap">Google account linked</p>
-                    </div>
-                  </div>
-                  <div class="h-0 relative shrink-0 w-full">
-                    <div class="absolute inset-[-1px_0_0_0]"><img alt="" class="block max-w-none size-full" src="./assets/9dc79.svg" /></div>
-                  </div>
-                  <div class="content-stretch flex gap-[18px] items-center relative shrink-0 w-full">
-                    <div class="act content-stretch flex gap-[6px] items-center relative shrink-0">
-                      <p class="[word-break:break-word] font-['Geist'] font-medium leading-[1.5] relative shrink-0 text-[#707a8f] text-[14px] tracking-[-0.28px] whitespace-nowrap">Test</p>
-                      <div class="overflow-clip relative shrink-0 size-[16px]" data-name="Frame"><div class="absolute contents inset-0"><div class="absolute inset-[11.38%_13.5%_11.33%_13.54%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-2.167px_-1.82px] mask-size-[16px_16px]" style="mask-image:url('./assets/02dd6.svg');-webkit-mask-image:url('./assets/02dd6.svg')"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/def25.svg" /></div></div></div>
-                    </div>
-                    <div class="act content-stretch flex gap-[6px] items-center relative shrink-0">
-                      <p class="[word-break:break-word] font-['Geist'] font-medium leading-[1.5] relative shrink-0 text-[#707a8f] text-[14px] tracking-[-0.28px] whitespace-nowrap">Configure</p>
-                      <div class="overflow-clip relative shrink-0 size-[16px]" data-name="Frame"><div class="absolute contents inset-0"><div class="absolute inset-[7.55%_5.12%_7.52%_5.21%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-0.833px_-1.208px] mask-size-[16px_16px]" style="mask-image:url('./assets/02dd6.svg');-webkit-mask-image:url('./assets/02dd6.svg')"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/0e051.svg" /></div></div></div>
-                    </div>
-                    <div class="act content-stretch flex gap-[6px] items-center relative shrink-0">
-                      <p class="[word-break:break-word] font-['Geist'] font-medium leading-[1.5] relative shrink-0 text-[#707a8f] text-[14px] tracking-[-0.28px] whitespace-nowrap">Disconnect</p>
-                      <div class="relative shrink-0 size-[16px]" data-name="fluent:plug-disconnected-16-regular"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/b49a4.svg" /></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Microsoft Clarity -->
-              <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start min-w-px p-[4px] relative rounded-[8px] self-stretch" data-name="Widget">
-                <div class="content-stretch flex gap-[8px] items-center justify-center px-[12px] py-[6px] relative shrink-0 w-full" data-name="Widget Header">
-                  <div class="relative shrink-0 size-[20px]" data-name="mdi:microsoft">
-                    <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/b01cc.svg" />
-                  </div>
-                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#1b1d22] text-[16px]">
-                    Microsoft Clarity
-                  </p>
-                  <div class="relative shrink-0 size-[8px]">
-                    <div class="absolute inset-[-37.5%]"><img alt="" class="block max-w-none size-full" src="./assets/dc9f4.svg" /></div>
-                  </div>
-                </div>
-                <div class="conn-card bg-white content-stretch flex flex-[1_0_0] flex-col gap-[14px] items-start min-h-px overflow-clip px-[12px] py-[14px] relative rounded-[8px] shadow-[0px_2px_2px_0px_rgba(0,0,0,0.07)] w-full" data-name="Widget Content">
-                  <div class="[word-break:break-word] content-stretch flex flex-[1_0_0] font-['Geist'] font-medium gap-[4px] items-start leading-[1.5] min-h-px relative text-[14px] tracking-[-0.28px] w-full whitespace-nowrap">
-                    <p class="relative shrink-0 text-[#707a8f]">Last sync:</p>
-                    <p class="relative shrink-0 text-[#363b45]">About 18 hours ago</p>
-                  </div>
-                  <div class="h-0 relative shrink-0 w-full">
-                    <div class="absolute inset-[-1px_0_0_0]"><img alt="" class="block max-w-none size-full" src="./assets/9dc79.svg" /></div>
-                  </div>
-                  <div class="content-stretch flex gap-[18px] items-center relative shrink-0 w-full">
-                    <div class="act content-stretch flex gap-[6px] items-center relative shrink-0">
-                      <p class="[word-break:break-word] font-['Geist'] font-medium leading-[1.5] relative shrink-0 text-[#707a8f] text-[14px] tracking-[-0.28px] whitespace-nowrap">Configure</p>
-                      <div class="overflow-clip relative shrink-0 size-[16px]" data-name="Frame"><div class="absolute contents inset-0"><div class="absolute inset-[7.55%_5.12%_7.52%_5.21%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-0.833px_-1.208px] mask-size-[16px_16px]" style="mask-image:url('./assets/02dd6.svg');-webkit-mask-image:url('./assets/02dd6.svg')"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/0e051.svg" /></div></div></div>
-                    </div>
-                    <div class="act content-stretch flex gap-[6px] items-center relative shrink-0">
-                      <p class="[word-break:break-word] font-['Geist'] font-medium leading-[1.5] relative shrink-0 text-[#707a8f] text-[14px] tracking-[-0.28px] whitespace-nowrap">Disconnect</p>
-                      <div class="relative shrink-0 size-[16px]" data-name="fluent:plug-disconnected-16-regular"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/b49a4.svg" /></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="content-stretch flex gap-[20px] items-start relative shrink-0 w-full">
-              <!-- SEMrush -->
-              <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start min-w-px p-[4px] relative rounded-[8px] self-stretch" data-name="Widget">
-                <div class="content-stretch flex gap-[8px] items-center justify-center px-[12px] py-[6px] relative shrink-0 w-full" data-name="Widget Header">
-                  <div class="relative shrink-0 size-[20px]" data-name="Frame">
-                    <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/cefd9.svg" />
-                  </div>
-                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#1b1d22] text-[16px]">
-                    SEMrush
-                  </p>
-                  <div class="relative shrink-0 size-[8px]">
-                    <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/379e0.svg" />
-                  </div>
-                </div>
-                <div class="conn-card bg-white content-stretch flex flex-col gap-[10px] h-[98px] items-center justify-end overflow-clip px-[12px] py-[14px] relative rounded-[8px] shadow-[0px_2px_2px_0px_rgba(0,0,0,0.07)] shrink-0 w-full" data-name="Widget Content">
-                  <div class="[word-break:break-word] content-stretch flex font-['Geist'] font-medium gap-[4px] items-start leading-[1.5] relative shrink-0 text-[14px] tracking-[-0.28px] w-full whitespace-nowrap">
-                    <p class="relative shrink-0 text-[#707a8f]">- :</p>
-                    <p class="relative shrink-0 text-[#363b45]">-</p>
-                  </div>
-                  <div class="h-0 relative shrink-0 w-full">
-                    <div class="absolute inset-[-1px_0_0_0]"><img alt="" class="block max-w-none size-full" src="./assets/72e06.svg" /></div>
-                  </div>
-                  <div class="btn bg-white border border-[#dddfe4] border-solid content-stretch flex h-[34px] items-center justify-center px-[14px] py-[8px] relative rounded-[8px] shrink-0 w-full">
-                    <p class="[word-break:break-word] font-['Geist'] font-medium leading-[0.9] relative shrink-0 text-[#707a8f] text-[14px] whitespace-nowrap">Setup</p>
-                  </div>
-                </div>
-              </div>
-              <!-- Screaming Frog -->
-              <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start min-w-px p-[4px] relative rounded-[8px]" data-name="Widget">
-                <div class="content-stretch flex gap-[8px] items-center justify-center px-[12px] py-[6px] relative shrink-0 w-full" data-name="Widget Header">
-                  <div class="relative shrink-0 size-[20px]" data-name="Frame">
-                    <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/f9710.svg" />
-                  </div>
-                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#1b1d22] text-[16px]">
-                    Screaming Frog
-                  </p>
-                  <div class="relative shrink-0 size-[8px]">
-                    <div class="absolute inset-[-37.5%]"><img alt="" class="block max-w-none size-full" src="./assets/dc9f4.svg" /></div>
-                  </div>
-                </div>
-                <div class="conn-card bg-white content-stretch flex flex-col gap-[14px] items-start overflow-clip px-[12px] py-[14px] relative rounded-[8px] shadow-[0px_2px_2px_0px_rgba(0,0,0,0.07)] shrink-0 w-full" data-name="Widget Content">
-                  <div class="[word-break:break-word] content-stretch flex font-['Geist'] font-medium gap-[4px] items-start leading-[1.5] relative shrink-0 text-[14px] tracking-[-0.28px] whitespace-nowrap">
-                    <p class="relative shrink-0 text-[#707a8f]">Last sync:</p>
-                    <p class="relative shrink-0 text-[#363b45]">About 18 hours ago</p>
-                  </div>
-                  <div class="h-0 relative shrink-0 w-full">
-                    <div class="absolute inset-[-1px_0_0_0]"><img alt="" class="block max-w-none size-full" src="./assets/9dc79.svg" /></div>
-                  </div>
-                  <div class="content-stretch flex gap-[18px] items-center relative shrink-0 w-full">
-                    <div class="act content-stretch flex gap-[6px] items-center relative shrink-0">
-                      <p class="[word-break:break-word] font-['Geist'] font-medium leading-[1.5] relative shrink-0 text-[#707a8f] text-[14px] tracking-[-0.28px] whitespace-nowrap">Configure</p>
-                      <div class="overflow-clip relative shrink-0 size-[16px]" data-name="Frame"><div class="absolute contents inset-0"><div class="absolute inset-[7.55%_5.12%_7.52%_5.21%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-0.833px_-1.208px] mask-size-[16px_16px]" style="mask-image:url('./assets/02dd6.svg');-webkit-mask-image:url('./assets/02dd6.svg')"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/0e051.svg" /></div></div></div>
-                    </div>
-                    <div class="act content-stretch flex gap-[6px] items-center relative shrink-0">
-                      <p class="[word-break:break-word] font-['Geist'] font-medium leading-[1.5] relative shrink-0 text-[#707a8f] text-[14px] tracking-[-0.28px] whitespace-nowrap">Disconnect</p>
-                      <div class="relative shrink-0 size-[16px]" data-name="fluent:plug-disconnected-16-regular"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/b49a4.svg" /></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Page Speed Insights -->
-              <div class="bg-[#f6f7f8] content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start min-w-px p-[4px] relative rounded-[8px]" data-name="Widget">
-                <div class="content-stretch flex gap-[8px] items-center justify-center px-[12px] py-[6px] relative shrink-0 w-full" data-name="Widget Header">
-                  <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
-                    <div class="absolute contents inset-0" data-name="Clip path group">
-                      <div class="absolute inset-[7.29%_5.21%_8.33%_5.21%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.042px_-1.458px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
-                        <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/3996f.svg" />
-                      </div>
-                    </div>
-                  </div>
-                  <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#1b1d22] text-[16px]">
-                    Page Speed Insights
-                  </p>
-                  <div class="relative shrink-0 size-[8px]">
-                    <div class="absolute inset-[-37.5%]"><img alt="" class="block max-w-none size-full" src="./assets/dc9f4.svg" /></div>
-                  </div>
-                </div>
-                <div class="conn-card bg-white content-stretch flex flex-col gap-[14px] items-start overflow-clip px-[12px] py-[14px] relative rounded-[8px] shadow-[0px_2px_2px_0px_rgba(0,0,0,0.07)] shrink-0 w-full" data-name="Widget Content">
-                  <div class="[word-break:break-word] content-stretch flex font-['Geist'] font-medium gap-[4px] items-start leading-[1.5] relative shrink-0 text-[14px] tracking-[-0.28px] whitespace-nowrap">
-                    <p class="relative shrink-0 text-[#707a8f]">Last sync:</p>
-                    <p class="relative shrink-0 text-[#363b45]">About 18 hours ago</p>
-                  </div>
-                  <div class="h-0 relative shrink-0 w-full">
-                    <div class="absolute inset-[-1px_0_0_0]"><img alt="" class="block max-w-none size-full" src="./assets/9dc79.svg" /></div>
-                  </div>
-                  <div class="content-stretch flex gap-[18px] items-center relative shrink-0 w-full">
-                    <div class="act content-stretch flex gap-[6px] items-center relative shrink-0">
-                      <p class="[word-break:break-word] font-['Geist'] font-medium leading-[1.5] relative shrink-0 text-[#707a8f] text-[14px] tracking-[-0.28px] whitespace-nowrap">Configure</p>
-                      <div class="overflow-clip relative shrink-0 size-[16px]" data-name="Frame"><div class="absolute contents inset-0"><div class="absolute inset-[7.55%_5.12%_7.52%_5.21%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-0.833px_-1.208px] mask-size-[16px_16px]" style="mask-image:url('./assets/02dd6.svg');-webkit-mask-image:url('./assets/02dd6.svg')"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/0e051.svg" /></div></div></div>
-                    </div>
-                    <div class="act content-stretch flex gap-[6px] items-center relative shrink-0">
-                      <p class="[word-break:break-word] font-['Geist'] font-medium leading-[1.5] relative shrink-0 text-[#707a8f] text-[14px] tracking-[-0.28px] whitespace-nowrap">Disconnect</p>
-                      <div class="relative shrink-0 size-[16px]" data-name="fluent:plug-disconnected-16-regular"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/b49a4.svg" /></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Keyword -->
-            <div class="bg-[#f6f7f8] content-stretch flex flex-col gap-[6px] h-[144px] items-start p-[4px] relative rounded-[8px] shrink-0 w-[346.67px]" data-name="Widget">
-              <div class="content-stretch flex gap-[8px] items-center justify-center px-[12px] py-[6px] relative shrink-0 w-full" data-name="Widget Header">
-                <div class="overflow-clip relative shrink-0 size-[20px]" data-name="Frame">
-                  <div class="absolute contents inset-0" data-name="Clip path group">
-                    <div class="absolute inset-[8.33%_8.37%_8.33%_8.33%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1.667px_-1.667px] mask-size-[20px_20px]" style="mask-image:url('./assets/f6aa3.svg');-webkit-mask-image:url('./assets/f6aa3.svg')" data-name="Group">
-                      <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/f0c9a.svg" />
-                    </div>
-                  </div>
-                </div>
-                <p class="[word-break:break-word] flex-[1_0_0] font-['Geist'] font-medium leading-[0.9] min-w-px relative text-[#1b1d22] text-[16px]">
-                  Keyword
-                </p>
-                <div class="relative shrink-0 size-[8px]">
-                  <img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/379e0.svg" />
-                </div>
-              </div>
-              <div class="conn-card bg-white content-stretch flex flex-col gap-[10px] h-[98px] items-center justify-end overflow-clip px-[12px] py-[14px] relative rounded-[8px] shadow-[0px_2px_2px_0px_rgba(0,0,0,0.07)] shrink-0 w-full" data-name="Widget Content">
-                <div class="[word-break:break-word] content-stretch flex font-['Geist'] font-medium gap-[4px] items-start leading-[1.5] relative shrink-0 text-[14px] tracking-[-0.28px] w-full whitespace-nowrap">
-                  <p class="relative shrink-0 text-[#707a8f]">- :</p>
-                  <p class="relative shrink-0 text-[#363b45]">-</p>
-                </div>
-                <div class="h-0 relative shrink-0 w-full">
-                  <div class="absolute inset-[-1px_0_0_0]"><img alt="" class="block max-w-none size-full" src="./assets/8182a.svg" /></div>
-                </div>
-                <div class="btn bg-white border border-[#dddfe4] border-solid content-stretch flex h-[34px] items-center justify-center px-[14px] py-[8px] relative rounded-[8px] shrink-0 w-full">
-                  <p class="[word-break:break-word] font-['Geist'] font-medium leading-[0.9] relative shrink-0 text-[#707a8f] text-[14px] whitespace-nowrap">Setup</p>
                 </div>
               </div>
             </div>
           </div>
+          <div class="bg-white border border-[#e2e4e9] border-solid content-stretch flex flex-col items-start overflow-clip relative rounded-[12px] shrink-0 w-full">
+              <div class="report-row bg-white border-[#e2e4e9] border-b border-solid content-stretch flex gap-[24px] items-center px-[20px] py-[14px] relative shrink-0 w-full" data-href="report-detail.html">
+                <div class="[word-break:break-word] content-stretch flex flex-[1_0_0] flex-col gap-[12px] items-start leading-none min-w-px relative">
+                  <p class="font-['Geist'] font-semibold relative shrink-0 text-[#1b1d22] text-[16px] tracking-[-0.32px] w-full">July 2026</p>
+                  <p class="font-['Geist'] font-medium relative shrink-0 text-[#8d95a5] text-[14px] tracking-[-0.28px] w-full">Jul 1, 2026 - Jul 31, 2026 • Admin LMS • Aug 18, 2026</p>
+                </div>
+                <div class="content-stretch flex gap-[12px] items-center relative shrink-0">
+                  <div class="relative shrink-0 size-[18px]" data-name="Frame"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/888c1.svg" /></div>
+                  <div class="relative shrink-0 size-[18px]" data-name="Frame"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/90cd8.svg" /></div>
+                </div>
+              </div>
+              <div class="report-row bg-white border-[#e2e4e9] border-b border-solid content-stretch flex gap-[24px] items-center px-[20px] py-[14px] relative shrink-0 w-full" data-href="report-detail.html">
+                <div class="[word-break:break-word] content-stretch flex flex-[1_0_0] flex-col gap-[12px] items-start leading-none min-w-px relative">
+                  <p class="font-['Geist'] font-semibold relative shrink-0 text-[#1b1d22] text-[16px] tracking-[-0.32px] w-full">August 2026</p>
+                  <p class="font-['Geist'] font-medium relative shrink-0 text-[#8d95a5] text-[14px] tracking-[-0.28px] w-full">Aug 1, 2026 - Aug 31, 2026 • User Training • Sep 10, 2026</p>
+                </div>
+                <div class="content-stretch flex gap-[12px] items-center relative shrink-0">
+                  <div class="relative shrink-0 size-[18px]" data-name="Frame"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/888c1.svg" /></div>
+                  <div class="relative shrink-0 size-[18px]" data-name="Frame"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/90cd8.svg" /></div>
+                </div>
+              </div>
+              <div class="report-row bg-white border-[#e2e4e9] border-b border-solid content-stretch flex gap-[24px] items-center px-[20px] py-[14px] relative shrink-0 w-full" data-href="report-detail.html">
+                <div class="[word-break:break-word] content-stretch flex flex-[1_0_0] flex-col gap-[12px] items-start leading-none min-w-px relative">
+                  <p class="font-['Geist'] font-semibold relative shrink-0 text-[#1b1d22] text-[16px] tracking-[-0.32px] w-full">September 2026</p>
+                  <p class="font-['Geist'] font-medium relative shrink-0 text-[#8d95a5] text-[14px] tracking-[-0.28px] w-full">Sep 1, 2026 - Sep 30, 2026 • Feature Launch • Sep 15, 2026</p>
+                </div>
+                <div class="content-stretch flex gap-[12px] items-center relative shrink-0">
+                  <div class="relative shrink-0 size-[18px]" data-name="Frame"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/888c1.svg" /></div>
+                  <div class="relative shrink-0 size-[18px]" data-name="Frame"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/90cd8.svg" /></div>
+                </div>
+              </div>
+              <div class="report-row bg-white border-[#e2e4e9] border-b border-solid content-stretch flex gap-[24px] items-center px-[20px] py-[14px] relative shrink-0 w-full" data-href="report-detail.html">
+                <div class="[word-break:break-word] content-stretch flex flex-[1_0_0] flex-col gap-[12px] items-start leading-none min-w-px relative">
+                  <p class="font-['Geist'] font-semibold relative shrink-0 text-[#1b1d22] text-[16px] tracking-[-0.32px] w-full">October 2026</p>
+                  <p class="font-['Geist'] font-medium relative shrink-0 text-[#8d95a5] text-[14px] tracking-[-0.28px] w-full">Oct 1, 2026 - Oct 31, 2026 • Performance Review • Oct 25, 2026</p>
+                </div>
+                <div class="content-stretch flex gap-[12px] items-center relative shrink-0">
+                  <div class="relative shrink-0 size-[18px]" data-name="Frame"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/888c1.svg" /></div>
+                  <div class="relative shrink-0 size-[18px]" data-name="Frame"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/90cd8.svg" /></div>
+                </div>
+              </div>
+              <div class="report-row bg-white border-[#e2e4e9] border-b border-solid content-stretch flex gap-[24px] items-center px-[20px] py-[14px] relative shrink-0 w-full" data-href="report-detail.html">
+                <div class="[word-break:break-word] content-stretch flex flex-[1_0_0] flex-col gap-[12px] items-start leading-none min-w-px relative">
+                  <p class="font-['Geist'] font-semibold relative shrink-0 text-[#1b1d22] text-[16px] tracking-[-0.32px] w-full">November 2026</p>
+                  <p class="font-['Geist'] font-medium relative shrink-0 text-[#8d95a5] text-[14px] tracking-[-0.28px] w-full">Nov 1, 2026 - Nov 30, 2026 • Client Feedback Collection • Nov 20, 2026</p>
+                </div>
+                <div class="content-stretch flex gap-[12px] items-center relative shrink-0">
+                  <div class="relative shrink-0 size-[18px]" data-name="Frame"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/888c1.svg" /></div>
+                  <div class="relative shrink-0 size-[18px]" data-name="Frame"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/90cd8.svg" /></div>
+                </div>
+              </div>
+              <div class="report-row bg-white content-stretch flex gap-[24px] items-center px-[20px] py-[14px] relative shrink-0 w-full" data-href="report-detail.html">
+                <div class="[word-break:break-word] content-stretch flex flex-[1_0_0] flex-col gap-[12px] items-start leading-none min-w-px relative">
+                  <p class="font-['Geist'] font-semibold relative shrink-0 text-[#1b1d22] text-[16px] tracking-[-0.32px] w-full">September 2026</p>
+                  <p class="font-['Geist'] font-medium relative shrink-0 text-[#8d95a5] text-[14px] tracking-[-0.28px] w-full">Sep 1, 2026 - Sep 30, 2026 • System Upgrade • Oct 5, 2026</p>
+                </div>
+                <div class="content-stretch flex gap-[12px] items-center relative shrink-0">
+                  <div class="relative shrink-0 size-[18px]" data-name="Frame"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/888c1.svg" /></div>
+                  <div class="relative shrink-0 size-[18px]" data-name="Frame"><img alt="" class="absolute block inset-0 max-w-none size-full" src="./assets/90cd8.svg" /></div>
+                </div>
+              </div>
+          </div>
+        
         </div>
       </div>
     </div>
@@ -705,6 +502,11 @@
     if (notif && badge) {
       notif.addEventListener('click', () => { badge.style.display = 'none'; });
     }
+
+    // Report rows -> detail
+    document.querySelectorAll('.report-row[data-href]').forEach((row) => {
+      row.addEventListener('click', () => { window.location.href = row.getAttribute('data-href'); });
+    });
   </script>
 </body>
 </html>

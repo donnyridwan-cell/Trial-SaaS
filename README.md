@@ -1,4 +1,4 @@
-# Trial — Brownies Farm Dashboard
+# Trial — Browning Law Firm Dashboard
 
 A pixel-accurate, live implementation of the **Overview** dashboard from the
 [Figma design](https://www.figma.com/design/QGQbE5vaHOTX1ZqthSIaAg/Trial---Colin-Melia?node-id=2-20).
